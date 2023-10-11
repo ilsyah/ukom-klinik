@@ -1,5 +1,5 @@
 import React from 'react'
-import Topnav2 from '../../components/navigasi/Topnav2'
+import Topnav2 from '../../admin/components/Topnav2'
 import Footer2 from '../../components/navigasi/Footer2';
 import doctor_icon from '../../assets/doctor-icon.png'
 import { Link } from "react-router-dom";
