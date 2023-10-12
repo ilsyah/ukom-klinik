@@ -14,6 +14,15 @@ const Pendaftaran = () => {
                             <h4>Pendaftaran</h4>
                             <form action="">
                                 <div className="form-row mt-3">
+                                    <label className="col-md-3">Nama Lengkap</label>
+                                    <div className="col-md-8">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i className='fa fa-user'></i></span>
+                                            <input type="number" class="form-control" placeholder="Nama Lengkap" aria-label="Username" aria-describedby="basic-addon1" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="form-row mt-3">
                                     <label className="col-md-3">TGL</label>
                                     <span>Tgl / Bulan / Tahun</span>
                                 </div>
@@ -30,7 +39,7 @@ const Pendaftaran = () => {
                                     <label className="col-md-3">NIK</label>
                                     <div className="col-md-8">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">🍌</span>
+                                            <span class="input-group-text" id="basic-addon1"><i className='fa fa-book'></i></span>
                                             <input type="number" class="form-control" placeholder="NIK" aria-label="Username" aria-describedby="basic-addon1" />
                                         </div>
                                     </div>

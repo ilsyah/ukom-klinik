@@ -38,7 +38,7 @@ const Antrian = () => {
                         <tr>
                           <td>Jono Subaidi</td>
                           <td>
-                            <Link to="" className="btn btn-xs btn-warning">
+                            <Link to="/dokter/detail-antrian" className="btn btn-xs btn-warning">
                               Detail
                             </Link>
                           </td>

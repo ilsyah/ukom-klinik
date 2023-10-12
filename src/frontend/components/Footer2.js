@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer2 = () => {
     return (
-        <footer>
+        <footer className='mx-5 '>
             <strong>
                 Copyright © 2022-2023 <span className="text-danger"> JADIDIN.io </span>{" "}
             </strong>

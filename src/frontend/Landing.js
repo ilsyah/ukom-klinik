@@ -15,9 +15,13 @@ const Landing = () => {
                             <h4>Apakah Anda Memiliki Keluhan?</h4>
                             <p>Segeralah Berobat Karena Kesehatan Anda Adalah Prioritas Kami</p>
                             {/* <div className="mx-1"> */}
-                            <button type="button" class="btn btn-outline-light mx-1">Pasien</button>
-                            <button type="button" class="btn btn-outline-light mx-1">Dokter</button>
-                            <Link to='/admin/dashboard'>
+                            <Link to='/poliklinik'>
+                                <button type="button" class="btn btn-outline-light mx-1">Pasien</button>
+                            </Link>
+                            <Link to='/admin/login'>
+                                <button type="button" class="btn btn-outline-light mx-1">Dokter</button>
+                            </Link>
+                            <Link to='/admin/login'>
                                 <button type="button" class="btn btn-outline-light mx-1">Admin</button>
                             </Link>
                             {/* </div> */}

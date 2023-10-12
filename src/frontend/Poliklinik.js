@@ -13,7 +13,7 @@ const Poliklinik = () => {
                 <h4>Pilih Poliklinik</h4>
                 <div className="row">
                     <div className="col-3">
-                        <Link to='#'>
+                        <Link to='/pendaftaran'>
                             <div className="card">
                                 <div className="card-body d-flex justify-content-center align-items-center">
                                     <img src={doctor_icon} style={{ width: '5rem' }} alt="" />

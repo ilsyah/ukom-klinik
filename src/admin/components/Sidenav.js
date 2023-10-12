@@ -4,7 +4,7 @@ import logo from "../../assets/logo-klinik.png";
 
 const Sidenav = () => {
   return (
-    <aside className="main-sidebar sidebar-dark-primary elevation-4">
+    <aside className="main-sidebar sidebar-dark-primary elevation-5">
       {/* Brand Logo */}
       <Link to="" className="brand-link">
         <img
@@ -32,12 +32,6 @@ const Sidenav = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/admin/antrian" className="nav-link">
-                <i className="nav-icon fas fa-users" />
-                <p>Antrian</p>
-              </Link>
-            </li>
-            <li className="nav-item">
               <Link to="#" className="nav-link">
                 <i className="nav-icon fas fa-book" />
                 <p>
@@ -53,24 +47,19 @@ const Sidenav = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="pages/examples/profile.html" className="nav-link">
+                  <Link to="/admin/data-layanan" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Data Layanan</p>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="pages/examples/e-commerce.html" className="nav-link">
-                    <i className="far fa-circle nav-icon" />
-                    <p>E-commerce</p>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
             <li className="nav-item">
-              <a href="pages/widgets.html" className="nav-link">
+
+              <Link to='/admin/history' className="nav-link">
                 <i className="nav-icon fas fa-archive" />
                 <p>History</p>
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

@@ -19,7 +19,7 @@ const Login = () => {
             </span>
           </div>
           <div className="card-body">
-            <p className="login-box-msg">Sign in for Admin</p>
+            {/* <p className="login-box-msg">Sign in for Admin</p> */}
             <form action="../../index3.html" method="post">
               <div className="input-group mb-3">
                 <input

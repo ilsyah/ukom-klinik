@@ -14,7 +14,7 @@ const History = () => {
           <div className="container-fluid">
             <div className="row">
               <div className="col-12">
-                <div className="card">
+                <div className="card mt-3">
                   <div className="card-header">
                     <h3 className="card-title">History Pasien</h3>
                     <div className="card-tools">
@@ -61,6 +61,54 @@ const History = () => {
                       <tbody>
                         <tr>
                           <td>1.</td>
+                          <td>Dicky Ilyasyah</td>
+                          <td>
+                            <Link className="btn btn-xs btn-warning col-5">
+                              detail
+                            </Link>
+                          </td>
+                          <td>
+                            <span className="badge bg-success">Selesai</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>2.</td>
+                          <td>Dicky Ilyasyah</td>
+                          <td>
+                            <Link className="btn btn-xs btn-warning col-5">
+                              detail
+                            </Link>
+                          </td>
+                          <td>
+                            <span className="badge bg-success">Selesai</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>3.</td>
+                          <td>Dicky Ilyasyah</td>
+                          <td>
+                            <Link className="btn btn-xs btn-warning col-5">
+                              detail
+                            </Link>
+                          </td>
+                          <td>
+                            <span className="badge bg-success">Selesai</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>4.</td>
+                          <td>Dicky Ilyasyah</td>
+                          <td>
+                            <Link className="btn btn-xs btn-warning col-5">
+                              detail
+                            </Link>
+                          </td>
+                          <td>
+                            <span className="badge bg-success">Selesai</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>5.</td>
                           <td>Dicky Ilyasyah</td>
                           <td>
                             <Link className="btn btn-xs btn-warning col-5">
