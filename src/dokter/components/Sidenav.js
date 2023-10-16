@@ -38,13 +38,13 @@ const Sidenav = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/dokter/pasien" className="nav-link">
+              <Link to="/dokter/antrian" className="nav-link">
                 <i className="nav-icon fas fa-users" />
                 <p>Antri Pasien</p>
               </Link>
             </li>
             <li className="nav-item">
-              <a href="pages/widgets.html" className="nav-link">
+              <a href="/dokter/history" className="nav-link">
                 <i className="nav-icon fas fa-archive" />
                 <p>History</p>
               </a>

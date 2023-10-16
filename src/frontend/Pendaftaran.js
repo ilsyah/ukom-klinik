@@ -1,6 +1,7 @@
 import React from 'react'
 import Topnav2 from './components/Topnav2'
 import Footer2 from './components/Footer2';
+import { Link } from "react-router-dom";
 
 const Pendaftaran = () => {
     return (
@@ -8,7 +9,9 @@ const Pendaftaran = () => {
             <Topnav2 />
             <div className="container">
                 <div className="my-5">
-                    <button className="btn btn-outline-light mb-3">Cancel</button>
+                    <Link to='/poliklinik'>
+                        <button className="btn btn-outline-light mb-3">Cancel</button>
+                    </Link>
                     <div className="card">
                         <div className="card-body">
                             <h4>Pendaftaran</h4>
@@ -18,7 +21,7 @@ const Pendaftaran = () => {
                                     <div className="col-md-8">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1"><i className='fa fa-user'></i></span>
-                                            <input type="number" class="form-control" placeholder="Nama Lengkap" aria-label="Username" aria-describedby="basic-addon1" />
+                                            <input type="text" class="form-control" placeholder="Nama Lengkap" aria-label="Username" aria-describedby="basic-addon1" />
                                         </div>
                                     </div>
                                 </div>

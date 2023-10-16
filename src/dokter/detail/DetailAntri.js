@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Topnav from "../components/Topnav";
 import Sidenav from "../components/Sidenav";
+import Footer from "../components/Footer";
 
 const DetailAntrian = () => {
     return (
@@ -10,43 +11,44 @@ const DetailAntrian = () => {
             <Sidenav />
             <div className="content-wrapper">
                 <section className="content">
-                    <div className="container-fluid">
-                        <div className="row">
-                            <form>
-                                <div className="form-group">
-                                    <label htmlFor="exampleFormControlInput1">Nama : </label>
-                                    <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="exampleFormControlSelect1">NIK :</label>
-                                    <select className="form-control" id="exampleFormControlSelect1">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="exampleFormControlSelect2">Example multiple select</label>
-                                    <select multiple className="form-control" id="exampleFormControlSelect2">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="exampleFormControlTextarea1">Example textarea</label>
-                                    <textarea className="form-control" id="exampleFormControlTextarea1" rows={3} defaultValue={""} />
-                                </div>
-                            </form>
-
+                    <div className="container-fluid p-5">
+                        <div className="mb-3">
+                            <h5>Detail Antrian</h5>
+                        </div>
+                        <div className="card">
+                            <div className="card-body">
+                                <form>
+                                    <div className="form-row mt-3">
+                                        <label className="col-md-3">Nama Lengkap</label>
+                                        <span>Nama Pasien</span>
+                                    </div>
+                                    <div className="form-row mt-3">
+                                        <label className="col-md-3">NIK</label>
+                                        <span>XXXXXXXXXXXXXX</span>
+                                    </div>
+                                    <div className="form-row mt-3">
+                                        <label className="col-md-3">Poliklinik</label>
+                                        <span>Nama Poliklinik</span>
+                                    </div>
+                                    <div className="form-row mt-3">
+                                        <label className="col-md-3">Tanggal</label>
+                                        <span>Tgl/Bln/Thn : J.M</span>
+                                    </div>
+                                    <div className="form-row mt-3">
+                                        <label className="col-md-3">Penjamin</label>
+                                        <span>Penjamin</span>
+                                    </div>
+                                    <div className="form-row mt-3">
+                                        <label className="col-md-3">No Antrian</label>
+                                        <span>XX</span>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </section>
             </div>
+            <Footer />
         </div>
     );
 };
