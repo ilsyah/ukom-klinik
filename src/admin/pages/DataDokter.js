@@ -36,6 +36,11 @@ const DataDokter = () => {
                     </div>
                   </div>
                   {/* /.card-header */}
+                  <div className="col-lg-3 px-3 mb-3">
+                    <Link to='/admin/tambah-dokter'>
+                      <button className="btn btn-outline-light btn-sm"><i className="fa fa-plus fa-sm"></i> Tambah Dokter</button>
+                    </Link>
+                  </div>
                   <div
                     className="card-body table-responsive p-0"
                     style={{ height: 400 }}>
@@ -56,8 +61,11 @@ const DataDokter = () => {
                           <td>John.Doe@gmial.com</td>
                           <td>Jl.Magersari Blok A no.12</td>
                           <td>
-                            <Link className="btn btn-sm btn-warning">
-                              Details
+                            <Link to='/admin/edit-dokter' className="btn btn-sm btn-warning mx-1">
+                              <i className="fa fa-edit fa-sm"></i>
+                            </Link>
+                            <Link className="btn btn-sm btn-danger mx-1">
+                              <i className="fa fa-trash-alt fa-sm"></i>
                             </Link>
                           </td>
                         </tr>
@@ -67,8 +75,11 @@ const DataDokter = () => {
                           <td>John.Doe@gmial.com</td>
                           <td>Jl.Magersari Blok A no.12</td>
                           <td>
-                            <Link className="btn btn-sm btn-warning">
-                              Details
+                            <Link className="btn btn-sm btn-warning mx-1">
+                              <i className="fa fa-edit fa-sm"></i>
+                            </Link>
+                            <Link className="btn btn-sm btn-danger mx-1">
+                              <i className="fa fa-trash-alt fa-sm"></i>
                             </Link>
                           </td>
                         </tr>
@@ -78,13 +89,47 @@ const DataDokter = () => {
                           <td>John.Doe@gmial.com</td>
                           <td>Jl.Magersari Blok A no.12</td>
                           <td>
-                            <Link className="btn btn-sm btn-warning">
-                              Details
+                            <Link className="btn btn-sm btn-warning mx-1">
+                              <i className="fa fa-edit fa-sm"></i>
+                            </Link>
+                            <Link className="btn btn-sm btn-danger mx-1">
+                              <i className="fa fa-trash-alt fa-sm"></i>
                             </Link>
                           </td>
                         </tr>
                       </tbody>
                     </table>
+                  </div>
+                  <div className="card-footer">
+                    <div className="card-tools">
+                      <ul className="pagination pagination-sm float-right">
+                        <li className="page-item">
+                          <a className="page-link" href="#">
+                            «
+                          </a>
+                        </li>
+                        <li className="page-item">
+                          <a className="page-link" href="#">
+                            1
+                          </a>
+                        </li>
+                        <li className="page-item">
+                          <a className="page-link" href="#">
+                            2
+                          </a>
+                        </li>
+                        <li className="page-item">
+                          <a className="page-link" href="#">
+                            3
+                          </a>
+                        </li>
+                        <li className="page-item">
+                          <a className="page-link" href="#">
+                            »
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>

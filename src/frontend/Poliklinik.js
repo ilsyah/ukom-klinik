@@ -9,56 +9,160 @@ const Poliklinik = () => {
         <div className='wrapper'>
             <Topnav2 />
             <div className="container">
-
-                <h4>Pilih Poliklinik</h4>
-                <div className="row">
-                    <div className="col-3">
-                        <Link to='/pendaftaran'>
-                            <div className="card">
-                                <div className="card-body d-flex justify-content-center align-items-center">
-                                    <img src={doctor_icon} style={{ width: '5rem' }} alt="" />
-                                </div>
-                                <div className="card-footer">
-                                    <h5 className='text-center text-poli'>Poliklinik</h5>
-                                </div>
-                            </div>
-                        </Link>
+                <div className="mt-3">
+                    <div className="mb-3">
+                        <h1 className='text-center' >Pilih Poliklinik</h1>
+                        <p className="text-center">Anda Memiliki Keluhan? Berobatlah Sekarang Dan Poliklinik Yang Anda Inginkan</p>
                     </div>
-                    <div className="col-3">
-                        <Link to='#'>
-                            <div className="card">
-                                <div className="card-body d-flex justify-content-center align-items-center">
-                                    <img src={doctor_icon} style={{ width: '5rem' }} alt="" />
+                    <div className="row">
+                        <div className="col-lg-3 col-sm-6 col-md-6">
+                            <Link to='/pendaftaran'>
+                                <div className="card">
+                                    <div className="card-body d-flex justify-content-center align-items-center">
+                                        <img src={doctor_icon} style={{ width: '5rem' }} alt="" />
+                                    </div>
+                                    <div className="card-footer">
+                                        <h5 className='text-center text-poli'>Poliklinik</h5>
+                                    </div>
                                 </div>
-                                <div className="card-footer">
-                                    <h5 className='text-center text-poli'>Poliklinik</h5>
+                            </Link>
+                        </div>
+                        <div className="col-lg-3 col-sm-6 col-md-6">
+                            <Link to='#'>
+                                <div className="card">
+                                    <div className="card-body d-flex justify-content-center align-items-center">
+                                        <img src={doctor_icon} style={{ width: '5rem' }} alt="" />
+                                    </div>
+                                    <div className="card-footer">
+                                        <h5 className='text-center text-poli'>Poliklinik</h5>
+                                    </div>
                                 </div>
-                            </div>
-                        </Link>
+                            </Link>
+                        </div>
+                        <div className="col-lg-3 col-sm-6 col-md-6">
+                            <Link to='#'>
+                                <div className="card">
+                                    <div className="card-body d-flex justify-content-center align-items-center">
+                                        <img src={doctor_icon} style={{ width: '5rem' }} alt="" />
+                                    </div>
+                                    <div className="card-footer">
+                                        <h5 className='text-center text-poli'>Poliklinik</h5>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
+                        <div className="col-lg-3 col-sm-6 col-md-6">
+                            <Link to='#'>
+                                <div className="card">
+                                    <div className="card-body d-flex justify-content-center align-items-center">
+                                        <img src={doctor_icon} style={{ width: '5rem' }} alt="" />
+                                    </div>
+                                    <div className="card-footer">
+                                        <h5 className='text-center text-poli'>Poliklinik</h5>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
                     </div>
-                    <div className="col-3">
-                        <Link to='#'>
-                            <div className="card">
-                                <div className="card-body d-flex justify-content-center align-items-center">
-                                    <img src={doctor_icon} style={{ width: '5rem' }} alt="" />
+                    <div className="row">
+                        <div className="col-lg-3 col-sm-6 col-md-6">
+                            <Link to='/pendaftaran'>
+                                <div className="card">
+                                    <div className="card-body d-flex justify-content-center align-items-center">
+                                        <img src={doctor_icon} style={{ width: '5rem' }} alt="" />
+                                    </div>
+                                    <div className="card-footer">
+                                        <h5 className='text-center text-poli'>Poliklinik</h5>
+                                    </div>
                                 </div>
-                                <div className="card-footer">
-                                    <h5 className='text-center text-poli'>Poliklinik</h5>
+                            </Link>
+                        </div>
+                        <div className="col-lg-3 col-sm-6 col-md-6">
+                            <Link to='#'>
+                                <div className="card">
+                                    <div className="card-body d-flex justify-content-center align-items-center">
+                                        <img src={doctor_icon} style={{ width: '5rem' }} alt="" />
+                                    </div>
+                                    <div className="card-footer">
+                                        <h5 className='text-center text-poli'>Poliklinik</h5>
+                                    </div>
                                 </div>
-                            </div>
-                        </Link>
+                            </Link>
+                        </div>
+                        <div className="col-lg-3 col-sm-6 col-md-6">
+                            <Link to='#'>
+                                <div className="card">
+                                    <div className="card-body d-flex justify-content-center align-items-center">
+                                        <img src={doctor_icon} style={{ width: '5rem' }} alt="" />
+                                    </div>
+                                    <div className="card-footer">
+                                        <h5 className='text-center text-poli'>Poliklinik</h5>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
+                        <div className="col-lg-3 col-sm-6 col-md-6">
+                            <Link to='#'>
+                                <div className="card">
+                                    <div className="card-body d-flex justify-content-center align-items-center">
+                                        <img src={doctor_icon} style={{ width: '5rem' }} alt="" />
+                                    </div>
+                                    <div className="card-footer">
+                                        <h5 className='text-center text-poli'>Poliklinik</h5>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
                     </div>
-                    <div className="col-3">
-                        <Link to='#'>
-                            <div className="card">
-                                <div className="card-body d-flex justify-content-center align-items-center">
-                                    <img src={doctor_icon} style={{ width: '5rem' }} alt="" />
+                    <div className="row">
+                        <div className="col-lg-3 col-sm-6 col-md-6">
+                            <Link to='/pendaftaran'>
+                                <div className="card">
+                                    <div className="card-body d-flex justify-content-center align-items-center">
+                                        <img src={doctor_icon} style={{ width: '5rem' }} alt="" />
+                                    </div>
+                                    <div className="card-footer">
+                                        <h5 className='text-center text-poli'>Poliklinik</h5>
+                                    </div>
                                 </div>
-                                <div className="card-footer">
-                                    <h5 className='text-center text-poli'>Poliklinik</h5>
+                            </Link>
+                        </div>
+                        <div className="col-lg-3 col-sm-6 col-md-6">
+                            <Link to='#'>
+                                <div className="card">
+                                    <div className="card-body d-flex justify-content-center align-items-center">
+                                        <img src={doctor_icon} style={{ width: '5rem' }} alt="" />
+                                    </div>
+                                    <div className="card-footer">
+                                        <h5 className='text-center text-poli'>Poliklinik</h5>
+                                    </div>
                                 </div>
-                            </div>
-                        </Link>
+                            </Link>
+                        </div>
+                        <div className="col-lg-3 col-sm-6 col-md-6">
+                            <Link to='#'>
+                                <div className="card">
+                                    <div className="card-body d-flex justify-content-center align-items-center">
+                                        <img src={doctor_icon} style={{ width: '5rem' }} alt="" />
+                                    </div>
+                                    <div className="card-footer">
+                                        <h5 className='text-center text-poli'>Poliklinik</h5>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
+                        <div className="col-lg-3 col-sm-6 col-md-6">
+                            <Link to='#'>
+                                <div className="card">
+                                    <div className="card-body d-flex justify-content-center align-items-center">
+                                        <img src={doctor_icon} style={{ width: '5rem' }} alt="" />
+                                    </div>
+                                    <div className="card-footer">
+                                        <h5 className='text-center text-poli'>Poliklinik</h5>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
