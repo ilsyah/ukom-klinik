@@ -63,7 +63,7 @@ const History = () => {
                           <td>1.</td>
                           <td>Dicky Ilyasyah</td>
                           <td>
-                            <Link className="btn btn-xs btn-warning col-5">
+                            <Link to='/dokter/detail-history' className="btn btn-xs btn-warning col-5">
                               detail
                             </Link>
                           </td>

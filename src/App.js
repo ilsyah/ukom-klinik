@@ -23,6 +23,7 @@ import DetailAntrian from "./dokter/detail/DetailAntri";
 import Landing from "./frontend/Landing";
 import Poliklinik from "./frontend/Poliklinik";
 import Pendaftaran from "./frontend/Pendaftaran";
+import DetailHistory from "./dokter/detail/DetailHistory";
 // Frontend End
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <Route path="dokter/dashboard" element={<DashboardDokter />} />
         <Route path="dokter/antrian" element={<PasienDokter />} />
         <Route path="dokter/history" element={<HistoryDokter />} />
+        <Route path="dokter/detail-history" element={<DetailHistory />} />
         <Route path="dokter/detail-antrian" element={<DetailAntrian />} />
         {/* Dokter Routing End */}
 
