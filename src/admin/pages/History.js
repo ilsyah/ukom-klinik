@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Topnav from "../components/Topnav";
 import Sidenav from "../components/Sidenav";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 
 const History = () => {
+
+    const [history, setHistory] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const fetchHistory = () => {
+        fetch('http://127.0.0.1:8000/api/v1/history')
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                // console.log(data)
+                setLoading(false);
+                setHistory(data);
+            });
+    };
+
+    useEffect(() => {
+        fetchHistory();
+    }, []);
+
     return (
         <div className="wrapper">
             <Topnav />
@@ -50,84 +70,38 @@ const History = () => {
                                         </div>
                                         <div className="card-body table-responsive p-0"
                                             style={{ height: 400 }}>
-                                            <table className="table table-head-fixed text-nowrap text-center">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>Nama</th>
-                                                        <th>poliklinik</th>
-                                                        <th>#</th>
-                                                        <th>Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>1.</td>
-                                                        <td>Dicky Ilyasyah</td>
-                                                        <td>Umum</td>
-                                                        <td>
-                                                            <Link to='/admin/detail-pasien' className="btn btn-sm btn-warning mx-1">
-                                                                <i className="fa fa-info fa-sm"></i>
-                                                            </Link>
-                                                        </td>
-                                                        <td>
-                                                            <span className="badge bg-success">Selesai</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2.</td>
-                                                        <td>Dicky Ilyasyah</td>
-                                                        <td>Umum</td>
-                                                        <td>
-                                                            <Link to='/admin/detail-pasien' className="btn btn-sm btn-warning mx-1">
-                                                                <i className="fa fa-info fa-sm"></i>
-                                                            </Link>
-                                                        </td>
-                                                        <td>
-                                                            <span className="badge bg-success">Selesai</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3.</td>
-                                                        <td>Dicky Ilyasyah</td>
-                                                        <td>Umum</td>
-                                                        <td>
-                                                            <Link to='/admin/detail-pasien' className="btn btn-sm btn-warning mx-1">
-                                                                <i className="fa fa-info fa-sm"></i>
-                                                            </Link>
-                                                        </td>
-                                                        <td>
-                                                            <span className="badge bg-success">Selesai</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>4.</td>
-                                                        <td>Dicky Ilyasyah</td>
-                                                        <td>Umum</td>
-                                                        <td>
-                                                            <Link to='/admin/detail-pasien' className="btn btn-sm btn-warning mx-1">
-                                                                <i className="fa fa-info fa-sm"></i>
-                                                            </Link>
-                                                        </td>
-                                                        <td>
-                                                            <span className="badge bg-success">Selesai</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>5.</td>
-                                                        <td>Dicky Ilyasyah</td>
-                                                        <td>Umum</td>
-                                                        <td>
-                                                            <Link to='/admin/detail-pasien' className="btn btn-sm btn-warning mx-1">
-                                                                <i className="fa fa-info fa-sm"></i>
-                                                            </Link>
-                                                        </td>
-                                                        <td>
-                                                            <span className="badge bg-success">Selesai</span>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                            {loading ? <h1 className="text-center">Loading bang</h1> : (
+                                                <table className="table table-head-fixed text-nowrap text-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Nama</th>
+                                                            <th>poliklinik</th>
+                                                            <th>Penjamin</th>
+                                                            <th>#</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {history.map((item) => (
+                                                            <tr key={item.id}>
+                                                                <td>1.</td>
+                                                                <td>{item.nama}</td>
+                                                                <td>{item.poliklinik.poliklinik}</td>
+                                                                <td>{item.penjamin}</td>
+                                                                <td>
+                                                                    <Link to='/admin/detail-pasien' className="btn btn-sm btn-warning mx-1">
+                                                                        <i className="fa fa-info fa-sm"></i>
+                                                                    </Link>
+                                                                </td>
+                                                                <td>
+                                                                    <span className="badge bg-success">Selesai</span>
+                                                                </td>
+                                                            </tr>
+                                                        ))}
+                                                    </tbody>
+                                                </table>
+                                            )}
                                         </div>
                                     </div>
                                     <div className="card-footer">

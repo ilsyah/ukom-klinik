@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Topnav from "../components/Topnav";
 import Sidenav from "../components/Sidenav";
 import Footer from "../components/Footer";
 
 const DataDokter = () => {
+  const [dokter, setDokter] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchDokter = () => {
+    fetch('http://127.0.0.1:8000/api/v1/dokter')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        // console.log(data)
+        setLoading(false);
+        setDokter(data);
+      });
+  };
+
+  useEffect(() => {
+    fetchDokter();
+  }, []);
+
   return (
+    // <h1>y</h1>
     <div className="wrapper">
       <Topnav />
       <Sidenav />
@@ -44,61 +64,38 @@ const DataDokter = () => {
                   <div
                     className="card-body table-responsive p-0"
                     style={{ height: 400 }}>
-                    <table className="table table-head-fixed text-nowrap text-center">
-                      <thead>
-                        <tr>
-                          <th>No</th>
-                          <th>Nama</th>
-                          <th>Email</th>
-                          <th>Alamat</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>John Doe</td>
-                          <td>John.Doe@gmial.com</td>
-                          <td>Jl.Magersari Blok A no.12</td>
-                          <td>
-                            <Link to='/admin/edit-dokter' className="btn btn-sm btn-warning mx-1">
-                              <i className="fa fa-edit fa-sm"></i>
-                            </Link>
-                            <Link className="btn btn-sm btn-danger mx-1">
-                              <i className="fa fa-trash-alt fa-sm"></i>
-                            </Link>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>John Doe</td>
-                          <td>John.Doe@gmial.com</td>
-                          <td>Jl.Magersari Blok A no.12</td>
-                          <td>
-                            <Link className="btn btn-sm btn-warning mx-1">
-                              <i className="fa fa-edit fa-sm"></i>
-                            </Link>
-                            <Link className="btn btn-sm btn-danger mx-1">
-                              <i className="fa fa-trash-alt fa-sm"></i>
-                            </Link>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>John Doe</td>
-                          <td>John.Doe@gmial.com</td>
-                          <td>Jl.Magersari Blok A no.12</td>
-                          <td>
-                            <Link className="btn btn-sm btn-warning mx-1">
-                              <i className="fa fa-edit fa-sm"></i>
-                            </Link>
-                            <Link className="btn btn-sm btn-danger mx-1">
-                              <i className="fa fa-trash-alt fa-sm"></i>
-                            </Link>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    {loading ? <h1 className="text-center">Loading bang</h1> : (
+                      <table className="table table-head-fixed text-nowrap text-center">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Alamat</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {dokter.map((item) => (
+                            <tr key={item.id}>
+                              <td>1</td>
+                              <td>{item.nama}</td>
+                              <td>{item.email}</td>
+                              <td>{item.alamat}</td>
+                              <td>
+                                <Link to='/admin/edit-dokter' className="btn btn-sm btn-warning mx-1">
+                                  <i className="fa fa-edit fa-sm"></i>
+                                </Link>
+                                <Link className="btn btn-sm btn-danger mx-1">
+                                  <i className="fa fa-trash-alt fa-sm"></i>
+                                </Link>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    )}
+
                   </div>
                   <div className="card-footer">
                     <div className="card-tools">
