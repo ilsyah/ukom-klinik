@@ -39,7 +39,7 @@ const Poliklinik = () => {
                         <div className="row">
                             {poliklinik.map((item) => (
                                 <div key={item.id} className="col-lg-3 col-sm-6 col-md-6">
-                                    <Link to='/pendaftaran'>
+                                    <Link to={`/pendaftaran/${item.id}`}>
                                         <div className="card">
                                             <div className="card-body d-flex justify-content-center align-items-center">
                                                 <img src={doctor_icon} style={{ width: '5rem' }} alt="" />

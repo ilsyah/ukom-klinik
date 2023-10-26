@@ -35,7 +35,7 @@ function App() {
         {/* Frontend Routing Start */}
         <Route path="/" element={<Landing />} />
         <Route path="/poliklinik" element={<Poliklinik />} />
-        <Route path="/pendaftaran" element={<Pendaftaran />} />
+        <Route path="/pendaftaran/:id" element={<Pendaftaran />} />
         {/* Frontend Routing End */}
 
         {/* Dokter Routing Start */}
