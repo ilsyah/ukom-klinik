@@ -7,7 +7,19 @@ import { Link } from "react-router-dom";
 const History = () => {
 
     const [history, setHistory] = useState([]);
+    const [poli, setPoli] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const fetchPoli = () => {
+        fetch('http://127.0.0.1:8000/api/v1/poliklinik')
+            .then((response) => {
+                return response.json();
+            })
+            .then((datapoli) => {
+                // console.log(datapoli)
+                setPoli(datapoli);
+            })
+    }
 
     const fetchHistory = () => {
         fetch('http://127.0.0.1:8000/api/v1/history')
@@ -23,6 +35,7 @@ const History = () => {
 
     useEffect(() => {
         fetchHistory();
+        fetchPoli();
     }, []);
 
     return (
@@ -59,11 +72,13 @@ const History = () => {
                                     <div className="card-body p-0">
                                         <div className="row px-3 pb-2">
                                             <div className="col-sm-6 col-md-4 col-lg-2 d-flex align-items-center justify-content-start">
+
                                                 <select name="" id="" className="custom-select">
                                                     <option value="">poliklinik*</option>
-                                                    <option value="nama_dokter">nama dokter</option>
-                                                    <option value="nama_dokter">nama dokter</option>
-                                                    <option value="nama_dokter">nama dokter</option>
+                                                    {poli.map((item) => (
+                                                        <option key={item.id} value={item.id}>{item.poliklinik}</option>
+                                                    ))}
+
                                                 </select>
                                                 <button className="btn btn-sm btn-outline-light ml-2">View</button>
                                             </div>

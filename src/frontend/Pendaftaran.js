@@ -40,8 +40,23 @@ const Pendaftaran = () => {
                                     </div>
                                 </div>
                                 <div className="form-row mt-3">
+                                    <label className="col-md-3">Jenis Kelamin</label>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="optionjk" id="lk" value="laki-laki" />
+                                        <label class="form-check-label" for="jeniskelamin">Laki Laki</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="optionjk" id="pr" value="perempuan" />
+                                        <label class="form-check-label" for="jeniskelamin">Perempuan</label>
+                                    </div>
+                                </div>
+                                <div className="form-row mt-3">
                                     <label className="col-md-3">TGL</label>
-                                    <span>Tgl / Bulan / Tahun</span>
+                                    {/* <span>Tgl / Bulan / Tahun</span> */}
+                                    <div className="col-md-8">
+                                        <input className='form-control' type="date" name="" id="" />
+                                    </div>
                                 </div>
                                 <div className="form-row mt-3">
                                     <label className="col-md-3">Poliklinik</label>
@@ -49,8 +64,17 @@ const Pendaftaran = () => {
                                 </div>
                                 <div className="form-row mt-3">
                                     <label className="col-md-3">Penjamin</label>
-                                    <button className="btn btn-outline-light mr-2">BPJS Kesehatan</button>
-                                    <button className="btn btn-outline-light mr-2">Asuransi Lainnya</button>
+                                    {/* <button className="btn btn-outline-light mr-2">BPJS Kesehatan</button>
+                                    <button className="btn btn-outline-light mr-2">Asuransi Lainnya</button> */}
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="optionpj" id="umum" value="UMUM" />
+                                        <label class="form-check-label" for="penjamin">Umum</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="optionpj" id="bpjs" value="BPJS" />
+                                        <label class="form-check-label" for="penjamin">BPJS</label>
+                                    </div>
                                 </div>
                                 <div className="form-row mt-3">
                                     <label className="col-md-3">NIK</label>

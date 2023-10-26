@@ -1,10 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Topnav from "../components/Topnav";
 import Sidenav from "../components/Sidenav";
 import Footer from "../components/Footer";
 
 const TambahDokter = () => {
+
+    const [poli, setPoli] = useState([]);
+
+    const fetchPoli = () => {
+        fetch('http://127.0.0.1:8000/api/v1/poliklinik')
+            .then((response) => {
+                return response.json();
+            })
+            .then((datapoli) => {
+                console.log(datapoli)
+                setPoli(datapoli);
+            });
+    };
+
+    useEffect(() => {
+        fetchPoli();
+    }, []);
+
     return (
         <div className="wrapper">
             <Topnav />
@@ -37,9 +55,9 @@ const TambahDokter = () => {
                                                 <label className="col-md-3">Poliklinik <span className='text-danger'>*</span></label>
                                                 <select className="custom-select col-md-9" id="poliklinik">
                                                     <option value="">Pilih Poliklinik</option>
-                                                    <option value="">Poliklinik</option>
-                                                    <option value="">Poliklinik</option>
-                                                    <option value="">Poliklinik</option>
+                                                    {poli.map((item) => (
+                                                        <option key={item.id} value={item.id}>{item.poliklinik}</option>
+                                                    ))}
                                                 </select>
                                             </div>
                                             <div className="form-row mt-3">
