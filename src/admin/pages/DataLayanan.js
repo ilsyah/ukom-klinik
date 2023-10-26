@@ -56,7 +56,9 @@ const DataLayanan = () => {
                                     </div>
                                     {/* /.card-header */}
                                     <div className="col-lg-3 px-3 mb-3">
-                                        <button className="btn btn-outline-light btn-sm"><i className="fa fa-plus fa-sm"></i> Tambah Layanan</button>
+                                        <Link to='/admin/tambah-layanan'>
+                                            <button className="btn btn-outline-light btn-sm"><i className="fa fa-plus fa-sm"></i> Tambah Layanan</button>
+                                        </Link>
                                     </div>
                                     <div
                                         className="card-body table-responsive p-0"
@@ -79,7 +81,7 @@ const DataLayanan = () => {
                                                             <td>{item.poliklinik}</td>
                                                             <td>{item.kode_poli}</td>
                                                             <td>
-                                                                <Link className="btn btn-sm btn-warning mx-1">
+                                                                <Link to='/admin/edit-layanan' className="btn btn-sm btn-warning mx-1">
                                                                     <i className="fa fa-edit fa-sm"></i>
                                                                 </Link>
                                                                 <Link className="btn btn-sm btn-danger mx-1">

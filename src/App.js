@@ -24,6 +24,8 @@ import Landing from "./frontend/Landing";
 import Poliklinik from "./frontend/Poliklinik";
 import Pendaftaran from "./frontend/Pendaftaran";
 import DetailHistory from "./dokter/detail/DetailHistory";
+import TambahLayanan from "./admin/pages/TambahLayanan";
+import EditLayanan from "./admin/pages/EditLayanan";
 // Frontend End
 
 function App() {
@@ -33,7 +35,7 @@ function App() {
         {/* Frontend Routing Start */}
         <Route path="/" element={<Landing />} />
         <Route path="/poliklinik" element={<Poliklinik />} />
-        <Route path="/pendaftaran" element={<Pendaftaran />} />
+        <Route path="/pendaftaran/:id" element={<Pendaftaran />} />
         {/* Frontend Routing End */}
 
         {/* Dokter Routing Start */}
@@ -49,10 +51,13 @@ function App() {
         <Route path="admin/data-dokter" element={<DataDokter />} />
         <Route path="admin/tambah-dokter" element={<TambahDokter />} />
         <Route path="admin/edit-dokter" element={<EditDokter />} />
+
         <Route path="admin/data-layanan" element={<DataLayanan />} />
+        <Route path="admin/tambah-layanan" element={<TambahLayanan />} />
+        <Route path="admin/edit-layanan" element={<EditLayanan />} />
+
         <Route path="admin/antrian" element={<Antrian />} />
         <Route path="admin/login" element={<Login />} />
-        <Route path="admin/history" element={<History />} />
         <Route path="admin/history" element={<History />} />
         <Route path="admin/detail-pasien" element={<DetailPasien />} />
 
