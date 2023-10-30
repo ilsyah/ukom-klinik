@@ -83,7 +83,7 @@ const DataDokter = () => {
                               <td>{item.email}</td>
                               <td>{item.alamat}</td>
                               <td>
-                                <Link to='/admin/edit-dokter' className="btn btn-sm btn-warning mx-1">
+                                <Link to={`/admin/edit-dokter/${item.id}`} className="btn btn-sm btn-warning mx-1">
                                   <i className="fa fa-edit fa-sm"></i>
                                 </Link>
                                 <Link className="btn btn-sm btn-danger mx-1">
