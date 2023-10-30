@@ -13,9 +13,9 @@ import EditDokter from "./admin/pages/EditDokter";
 // Admin End
 
 // Dokter Start
-import DashboardDokter from "./dokter/pages/Dashboard"
-import PasienDokter from "./dokter/pages/Antrian"
-import HistoryDokter from "./dokter/pages/History"
+import DashboardDokter from "./dokter/pages/Dashboard";
+import PasienDokter from "./dokter/pages/Antrian";
+import HistoryDokter from "./dokter/pages/History";
 import DetailAntrian from "./dokter/detail/DetailAntri";
 // Dokter End
 
@@ -43,7 +43,7 @@ function App() {
         <Route path="dokter/antrian" element={<PasienDokter />} />
         <Route path="dokter/history" element={<HistoryDokter />} />
         <Route path="dokter/detail-history" element={<DetailHistory />} />
-        <Route path="dokter/detail-antrian" element={<DetailAntrian />} />
+        <Route path="dokter/detail-antrian/:id" element={<DetailAntrian />} />
         {/* Dokter Routing End */}
 
         {/* Admin Routing Start */}

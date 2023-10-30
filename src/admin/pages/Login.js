@@ -1,8 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo-klinik.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [validator, setValidator] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/admin/dashboard");
+    }
+  }, []);
+
+  const loginHandler = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append("email", email);
+    formData.append("password", password);
+
+    // await axios
+    //   .post("http://127.0.0.1:8000/api/auth/login", formData)
+    //   .then((response) => {
+    //     console.log(response.data.access_token);
+    //     localStorage.setItem("token", response.data.access_token);
+
+    //     navigate("/admin/dashboard");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.response.data);
+    //     setValidator(error.response.data);
+    //     setEmail("");
+    //     setPassword("");
+    //   });
+
+    await axios
+      .post("http://127.0.0.1:8000/api/login-dokter", formData)
+      .then((response) => {
+        console.log(response.data);
+        localStorage.setItem("token", response.data.token_login);
+
+        navigate("/dokter/dashboard");
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        setValidator(error.response.data);
+        // setEmail("");
+        // setPassword("");
+      });
+  };
+
   return (
     <div className="login-page">
       <div className="login-box">
@@ -20,12 +72,17 @@ const Login = () => {
           </div>
           <div className="card-body">
             {/* <p className="login-box-msg">Sign in for Admin</p> */}
-            <form action="../../index3.html" method="post">
+            <form onSubmit={loginHandler}>
+              {validator.message && (
+                <div className="alert alert-danger">{validator.message}</div>
+              )}
               <div className="input-group mb-3">
                 <input
                   type="email"
                   className="form-control"
                   placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <div className="input-group-append">
                   <div className="input-group-text">
@@ -33,11 +90,16 @@ const Login = () => {
                   </div>
                 </div>
               </div>
+              {validator.email && (
+                <div className="alert alert-danger">{validator.email[0]}</div>
+              )}
               <div className="input-group mb-3">
                 <input
                   type="password"
                   className="form-control"
                   placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <div className="input-group-append">
                   <div className="input-group-text">
@@ -45,14 +107,17 @@ const Login = () => {
                   </div>
                 </div>
               </div>
+              {validator.email && (
+                <div className="alert alert-danger">
+                  {validator.password[0]}
+                </div>
+              )}
               <div className="row">
                 {/* /.col */}
                 <div className="col-12">
-                  <Link to="/admin/dashboard">
-                    <button type="submit" className="btn btn-info btn-block">
-                      Sign In
-                    </button>
-                  </Link>
+                  <button type="submit" className="btn btn-info btn-block">
+                    Sign In
+                  </button>
                 </div>
                 {/* /.col */}
               </div>
