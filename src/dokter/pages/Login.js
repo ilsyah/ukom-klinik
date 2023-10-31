@@ -12,7 +12,7 @@ const Login = () => {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      navigate("/admin/dashboard");
+      navigate("/dokter/dashboard");
     }
   }, []);
 
@@ -23,22 +23,6 @@ const Login = () => {
 
     formData.append("email", email);
     formData.append("password", password);
-
-    // await axios
-    //   .post("http://127.0.0.1:8000/api/auth/login", formData)
-    //   .then((response) => {
-    //     console.log(response.data.access_token);
-    //     localStorage.setItem("token", response.data.access_token);
-
-    //     navigate("/admin/dashboard");
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.response.data);
-    //     setValidator(error.response.data);
-    //     setEmail("");
-    //     setPassword("");
-    //   });
-
     await axios
       .post("http://127.0.0.1:8000/api/login-dokter", formData)
       .then((response) => {
@@ -50,8 +34,8 @@ const Login = () => {
       .catch((error) => {
         console.log(error.response.data);
         setValidator(error.response.data);
-        // setEmail("");
-        // setPassword("");
+        setEmail("");
+        setPassword("");
       });
   };
 

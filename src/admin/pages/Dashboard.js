@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("data");
 
   useEffect(() => {
     if (!token) {

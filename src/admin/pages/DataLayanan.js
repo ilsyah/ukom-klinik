@@ -81,7 +81,7 @@ const DataLayanan = () => {
                                                             <td>{item.poliklinik}</td>
                                                             <td>{item.kode_poli}</td>
                                                             <td>
-                                                                <Link to='/admin/edit-layanan' className="btn btn-sm btn-warning mx-1">
+                                                                <Link to={`/admin/edit-layanan/${item.id}`} className="btn btn-sm btn-warning mx-1">
                                                                     <i className="fa fa-edit fa-sm"></i>
                                                                 </Link>
                                                                 <Link className="btn btn-sm btn-danger mx-1">

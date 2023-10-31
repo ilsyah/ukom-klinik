@@ -18,7 +18,7 @@ const Landing = () => {
                             <Link to='/poliklinik'>
                                 <button type="button" class="btn btn-outline-light mx-1">Pasien</button>
                             </Link>
-                            <Link to='/admin/login'>
+                            <Link to='/dokter/login'>
                                 <button type="button" class="btn btn-outline-light mx-1">Dokter</button>
                             </Link>
                             <Link to='/admin/login'>

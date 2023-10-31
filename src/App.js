@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Admin Start
+import LoginAdmin from "./admin/pages/LoginAdmin";
 import Dashboard from "./admin/pages/Dashboard";
 import DataDokter from "./admin/pages/DataDokter";
 import Antrian from "./admin/pages/Antrian";
-import Login from "./admin/pages/Login";
 import History from "./admin/pages/History";
 import DataLayanan from "./admin/pages/DataLayanan";
 import DetailPasien from "./admin/pages/DetailPasien";
@@ -14,6 +14,7 @@ import EditDokter from "./admin/pages/EditDokter";
 
 // Dokter Start
 import DashboardDokter from "./dokter/pages/Dashboard";
+import Login from "./dokter/pages/Login";
 import PasienDokter from "./dokter/pages/Antrian";
 import HistoryDokter from "./dokter/pages/History";
 import DetailAntrian from "./dokter/detail/DetailAntri";
@@ -42,22 +43,24 @@ function App() {
         <Route path="dokter/dashboard" element={<DashboardDokter />} />
         <Route path="dokter/antrian" element={<PasienDokter />} />
         <Route path="dokter/history" element={<HistoryDokter />} />
+        <Route path="dokter/login" element={<Login />} />
         <Route path="dokter/detail-history" element={<DetailHistory />} />
         <Route path="dokter/detail-antrian/:id" element={<DetailAntrian />} />
         {/* Dokter Routing End */}
 
         {/* Admin Routing Start */}
+        <Route path="admin/login" element={<LoginAdmin />} />
+
         <Route path="admin/dashboard" element={<Dashboard />} />
         <Route path="admin/data-dokter" element={<DataDokter />} />
         <Route path="admin/tambah-dokter" element={<TambahDokter />} />
-        <Route path="admin/edit-dokter" element={<EditDokter />} />
+        <Route path="admin/edit-dokter/:id" element={<EditDokter />} />
 
         <Route path="admin/data-layanan" element={<DataLayanan />} />
         <Route path="admin/tambah-layanan" element={<TambahLayanan />} />
-        <Route path="admin/edit-layanan" element={<EditLayanan />} />
+        <Route path="admin/edit-layanan/:id" element={<EditLayanan />} />
 
         <Route path="admin/antrian" element={<Antrian />} />
-        <Route path="admin/login" element={<Login />} />
         <Route path="admin/history" element={<History />} />
         <Route path="admin/detail-pasien" element={<DetailPasien />} />
 

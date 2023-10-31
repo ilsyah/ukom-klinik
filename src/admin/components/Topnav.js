@@ -7,27 +7,36 @@ const Topnav = () => {
 
   const navigate = useNavigate();
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("data");
 
   const fetchData = async () => {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    await axios.post("http://127.0.0.1:8000/api/auth/me").then((response) => {
-      setAdmin(response.data);
-    });
+    await axios
+      .post(`http://127.0.0.1:8000/api/is-auth-user?token=${token}`)
+      .then((response) => {
+        // console.log(response.data);
+        setAdmin(response.data.user);
+      });
   };
 
   useEffect(() => {
+    if (!token) {
+      navigate("/");
+    }
+
     fetchData();
   }, []);
 
   const logoutHandler = async () => {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    await axios.post("http://127.0.0.1:8000/api/auth/logout").then(() => {
-      localStorage.removeItem("token");
+    await axios
+      .post(`http://127.0.0.1:8000/api/is-auth-user?token=${token}`)
+      .then(() => {
+        localStorage.removeItem("data");
 
-      navigate("/");
-    });
+        navigate("/");
+      });
   };
+
+  // console.log(admin)
 
   return (
     <nav className="main-header navbar navbar-expand navbar-dark">

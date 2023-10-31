@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Topnav from "../components/Topnav";
 import Sidenav from "../components/Sidenav";
 import Footer from "../components/Footer";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const TambahLayanan = () => {
 
@@ -30,27 +32,19 @@ const TambahLayanan = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            const response = await fetch('http://127.0.0.1:8000/api/v1/poliklinik', {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
+        await axios
+            .post("http://127.0.0.1:8000/api/v1/poliklinik", formData)
+            .then((response) => {
+                console.log(response.data);
+                Swal.fire("Sukses", "Data Berhasil", "success");
+                navigate("/admin/data-layanan");
+            })
+            .catch((error) => {
+                console.log(error.response.data);
+                setError(error.response.data);
             });
-
-            if (response.ok) {
-                setError({});
-                setFormData({ poliklinik: '', kode_poli: '' });
-                navigate('/admin/data-layanan')
-            } else {
-                const errorData = await response.json();
-                setError(errorData.error)
-            }
-        } catch (error) {
-            setError({ general: 'terjadi Kesalahan:' + error.message });
-        }
     };
+    console.log(error)
 
     return (
         <div className="wrapper">
@@ -75,18 +69,22 @@ const TambahLayanan = () => {
                                             <div className="form-row mt-3">
                                                 <label className="col-md-3">Nama Poliklinik <span className='text-danger'>*</span></label>
                                                 <input id='poliklinik' name="poliklinik" type="text" placeholder='Nama Poliklinik' value={formData.poliklinik} onChange={handleChange} className="form-control col-md-9" />
-                                                {error.poliklinik && <p style={{ color: 'red' }}>{error.poliklinik}</p>}
+
                                             </div>
+                                            {error.poliklinik && <div className="d-flex justify-content-center alert alert-danger col-5 text-center">{error.poliklinik}</div>}
+
                                             <div className="form-row mt-3">
+
                                                 <label className="col-md-3">Kode Poli <span className='text-danger'>*</span></label>
                                                 <input id='kode' name="kode_poli" type="number" placeholder='Kode Poliklinik' value={formData.kode_poli} onChange={handleChange} className="form-control col-md-9" />
-                                                {error.kode_poli && <p style={{ color: 'red' }}>{error.kode_poli}</p>}
+
                                             </div>
+                                            {error.kode_poli && <div className="d-flex justify-content-center alert alert-danger col-5 text-center">{error.kode_poli}</div>}
                                             <div className="row mt-5 d-flex justify-content-center">
                                                 <button type="submit" className="btn btn-outline-light">Simpan <i className='fa fa-check'></i></button>
                                             </div>
                                         </form>
-                                        {error.general && <p style={{ color: 'red' }}>{error.general}</p>}
+                                        {/* {error.general && <p style={{ color: 'red' }}>{error.general}</p>} */}
                                     </div>
                                 </div>
                             </div>

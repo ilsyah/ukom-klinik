@@ -37,7 +37,7 @@ const DetailAntrian = () => {
     })
       .then((response) => {
         if (response.ok) {
-          navigate("/admin/history");
+          navigate("/dokter/history");
           Swal.fire("Sukses", "Data Berhasil", "success");
         } else {
           console.error("Error updating data");

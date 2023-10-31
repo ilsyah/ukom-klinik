@@ -1,10 +1,30 @@
-import React from 'react'
-import { Link } from "react-router-dom";
+import React, { useState } from 'react'
+import { Link, useParams } from "react-router-dom";
 import Topnav from "../components/Topnav";
 import Sidenav from "../components/Sidenav";
 import Footer from "../components/Footer";
 
 const EditDokter = () => {
+
+    const { id } = useParams();
+    const [data, setData] = useState({
+        nama: '',
+        email: '',
+    });
+
+    const fetchDataDokter = () => {
+        fetch(`http://127.0.0.1:8000/api/dokter/${id}`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                setData(data)
+                console.log(data)
+            })
+    }
+
+    console.log(data)
+
     return (
         <div className="wrapper">
             <Topnav />
@@ -35,9 +55,9 @@ const EditDokter = () => {
                                             </div>
                                             <div className="form-row mt-3">
                                                 <label className="col-md-3">Poliklinik <span className='text-danger'>*</span></label>
-                                                <select className="custom-select col-md-9" id="poliklinik">
-                                                    <option value="">Pilih Poliklinik</option>
-                                                    <option value="" selected>Umum</option>
+                                                <select className="custom-select col-md-9" id="poliklinik" defaultValue='pilih poliklinik'>
+                                                    <option value="pilih poliklinik">Pilih Poliklinik</option>
+                                                    <option value="">Umum</option>
                                                     <option value="">Poliklinik</option>
                                                     <option value="">Poliklinik</option>
                                                 </select>
