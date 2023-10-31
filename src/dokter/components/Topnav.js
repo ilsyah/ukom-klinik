@@ -13,7 +13,7 @@ const Topnav = () => {
     await axios
       .post(`http://127.0.0.1:8000/api/is-auth?token=${token}`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setDokter(response.data.user);
       });
   };
