@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Topnav from "../components/Topnav";
 import Sidenav from "../components/Sidenav";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 
 const History = () => {
+
+  const [history, setHistory] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchHistory = () => {
+    fetch('http://127.0.0.1:8000/api/v1/history')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        // console.log(data)
+        setLoading(false);
+        setHistory(data);
+      });
+  };
+
+  useEffect(() => {
+    fetchHistory();
+  }, []);
+
   return (
     <div className="wrapper">
       <Topnav />
@@ -14,7 +34,7 @@ const History = () => {
           <div className="container-fluid">
             <div className="row">
               <div className="col-12">
-                <div className="card">
+                <div className="card mt-3">
                   <div className="card-header">
                     <h3 className="card-title">History Pasien</h3>
                     <div className="card-tools">
@@ -47,34 +67,41 @@ const History = () => {
                       </ul>
                     </div>
                   </div>
-                  {/* /.card-header */}
-                  <div className="card-body p-0">
-                    <table className="table text-center">
-                      <thead>
-                        <tr>
-                          <th style={{ width: 10 }}>No</th>
-                          <th>Nama</th>
-                          <th>#</th>
-                          <th style={{ width: 40 }}>Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1.</td>
-                          <td>Dicky Ilyasyah</td>
-                          <td>
-                            <Link className="btn btn-xs btn-warning col-5">
-                              detail
-                            </Link>
-                          </td>
-                          <td>
-                            <span className="badge bg-success">Selesai</span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div className="card-body table-responsive p-0"
+                    style={{ height: 400 }}>
+                    {loading ? <h1 className="text-center">Loading bang</h1> : (
+                      <table className="table table-head-fixed text-nowrap text-center">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>poliklinik</th>
+                            <th>Penjamin</th>
+                            <th>#</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {history.map((item) => (
+                            <tr key={item.id}>
+                              <td>1.</td>
+                              <td>{item.nama}</td>
+                              <td>{item.poliklinik.poliklinik}</td>
+                              <td>{item.penjamin}</td>
+                              <td>
+                                <Link to='/admin/detail-pasien' className="btn btn-sm btn-warning mx-1">
+                                  <i className="fa fa-info fa-sm"></i>
+                                </Link>
+                              </td>
+                              <td>
+                                <span className="badge bg-success">Selesai</span>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    )}
                   </div>
-                  {/* /.card-body */}
                 </div>
               </div>
             </div>

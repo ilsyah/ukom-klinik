@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Topnav from "../components/Topnav";
 import Sidenav from "../components/Sidenav";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("data");
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/");
+    }
+  }, []);
+
   return (
     <div className="wrapper">
       <Topnav />
