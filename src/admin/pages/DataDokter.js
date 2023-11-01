@@ -70,6 +70,7 @@ const DataDokter = () => {
                           <tr>
                             <th>No</th>
                             <th>Nama</th>
+                            <th>poliklinik</th>
                             <th>Email</th>
                             <th>Alamat</th>
                             <th></th>
@@ -80,6 +81,7 @@ const DataDokter = () => {
                             <tr key={item.id}>
                               <td>1</td>
                               <td>{item.nama}</td>
+                              <td>{item.poliklinik.poliklinik}</td>
                               <td>{item.email}</td>
                               <td>{item.alamat}</td>
                               <td>

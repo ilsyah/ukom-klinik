@@ -10,7 +10,6 @@ const EditLayanan = () => {
 
     const { id } = useParams();
     const navigate = useNavigate();
-    // const [render, setRender] = useState(false);
     const [data, setData] = useState({});
     const [errors, setErrors] = useState({});
 
@@ -18,7 +17,6 @@ const EditLayanan = () => {
         axios.get(`http://127.0.0.1:8000/api/v1/poliklinik/${id}`)
             .then(response => {
                 setData(response.data);
-                console.log(response)
             })
             .catch(error => {
                 // Handle error, misalnya dengan menavigasi atau menampilkan pesan error
@@ -27,12 +25,15 @@ const EditLayanan = () => {
     }, [id]);
 
 
-    const handleUpdate = () => {
+    const handleUpdate = (e) => {
+
+        e.preventDefault();
+
         axios.put(`http://127.0.0.1:8000/api/v1/poliklinik/${id}`, data)
             .then(response => {
-                console.log(response)
+                // console.log(response)
                 Swal.fire("Sukses", "Data Berhasil di Update", "success");
-                // navigate('/admin/layanan')
+                navigate('/admin/data-layanan')
             })
             .catch(error => {
                 if (error.response && error.response.data.errors) {
@@ -44,11 +45,11 @@ const EditLayanan = () => {
     const handleChange = (e) => {
         setData({
             ...data,
-            [e.target.nama]: e.target.value
+            [e.target.name]: e.target.value
         });
     };
 
-    console.log(data)
+    // console.log(data)
 
     return (
         <div className="wrapper">
@@ -72,16 +73,17 @@ const EditLayanan = () => {
                                         <form onSubmit={handleUpdate}>
                                             <div className="form-row mt-3">
                                                 <label className="col-md-3">Nama Poliklinik <span className='text-danger'>*</span></label>
-                                                <input id='poliklinik' name="poliklinik" type="text" onChange={handleChange} value={data.poliklinik} className="form-control col-md-9" />
+                                                <input id='poliklinik' name="poliklinik" type="text" onChange={handleChange} value={data.poliklinik || ""} className="form-control col-md-9" />
                                             </div>
                                             <div className="form-row mt-3">
                                                 <label className="col-md-3">Kode Poli <span className='text-danger'>*</span></label>
-                                                <input id='kode' type="number" name="kode_poli" onChange={handleChange} value={data.kode_poli} className="form-control col-md-9" />
+                                                <input id='kode' type="number" name="kode_poli" onChange={handleChange} value={data.kode_poli || ""} className="form-control col-md-9" />
+                                            </div>
+                                            <div className="row mt-5 d-flex justify-content-center">
+                                                <button className="btn btn-outline-light">Simpan <i className='fa fa-check'></i></button>
                                             </div>
                                         </form>
-                                        <div className="row mt-5 d-flex justify-content-center">
-                                            <button className="btn btn-outline-light">Simpan <i className='fa fa-check'></i></button>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
