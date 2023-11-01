@@ -3,11 +3,14 @@ import Topnav2 from "./components/Topnav2";
 import Footer2 from "./components/Footer2";
 import Swal from "sweetalert2";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 const Pendaftaran = () => {
   const { id } = useParams();
   const [nama, setNama] = useState(id);
-  const [antrian, setAntrian] = useState([]);
+  const [antrian, setAntrian] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [insert, setInsert] = useState({});
 
   const fetchPoliklinik = () => {
     fetch(`http://127.0.0.1:8000/api/v1/poliklinik/${id}`)
@@ -23,23 +26,6 @@ const Pendaftaran = () => {
   useEffect(() => {
     fetchPoliklinik();
   }, []);
-
-  const fetchPelayanan = () => {
-    fetch("http://127.0.0.1:8000/api/v1/pelayanan")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        // console.log(data)
-        setAntrian(data);
-      });
-  };
-
-  useEffect(() => {
-    fetchPelayanan();
-  }, []);
-
-  // Post Data
 
   const [formData, setFormData] = useState({
     penjamin: "",
@@ -59,51 +45,38 @@ const Pendaftaran = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
-    // Menghapus pesan kesalahan yang terkait dengan input yang sedang diubah
+
     setError({
       ...error,
       [e.target.name]: "",
     });
   };
 
+  const getAntri = async (e) => {
+    e.preventDefault();
+
+    await axios
+      .post("http://127.0.0.1:8000/api/v1/get-antri", formData)
+      .then((response) => {
+        setLoading(false);
+        setAntrian(response.data.antrian);
+        setInsert(formData);
+      });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch("http://127.0.0.1:8000/api/v1/pelayanan", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        navigate("/");
-        setError({});
-        setFormData({
-          penjamin: "",
-          nama: "",
-          jk: "",
-          tanggal: "",
-          nik: "",
-          poliklinik_id: "",
-        });
+    await axios
+      .post("http://127.0.0.1:8000/api/v1/pelayanan", formData)
+      .then((response) => {
         Swal.fire("Sukses", "Data Berhasil", "success");
-      } else {
-        const errorData = await response.json();
-        setError(errorData.error);
-      }
-    } catch (error) {
-      setError({ general: "terjadi Kesalahan:" + error.message });
-    }
+        navigate("/");
+      })
+      .catch((error) => {
+        setError(error.response.data.errors);
+      });
   };
-
-  // const buttonAlert = (e) => {
-  //     e.preventDefault()
-  //     console.log(e)
-
-  // };
 
   return (
     <div className="wrapper">
@@ -116,7 +89,7 @@ const Pendaftaran = () => {
           <div className="card">
             <div className="card-body">
               <h4>Pendaftaran</h4>
-              <form onSubmit={handleSubmit}>
+              <form>
                 <div className="form-row mt-3">
                   <label className="col-md-3">Nama Lengkap</label>
                   <div className="col-md-8">
@@ -134,12 +107,15 @@ const Pendaftaran = () => {
                         aria-label="Username"
                         aria-describedby="basic-addon1"
                       />
-                      {error.nama && (
-                        <p style={{ color: "red" }}>{error.nama}</p>
-                      )}
                     </div>
+                    {error.nama && (
+                      <small className="text-danger text-center">
+                        {error.nama}
+                      </small>
+                    )}
                   </div>
                 </div>
+
                 <div className="form-row mt-3">
                   <label className="col-md-3">Jenis Kelamin</label>
                   <div className="form-check form-check-inline">
@@ -228,7 +204,9 @@ const Pendaftaran = () => {
                   </div>
                 </div>
                 {error.penjamin && (
-                  <p style={{ color: "red" }}>{error.penjamin}</p>
+                  <p className="text-end" style={{ color: "red" }}>
+                    {error.penjamin}
+                  </p>
                 )}
                 <div className="form-row mt-3">
                   <label className="col-md-3">NIK</label>
@@ -247,14 +225,93 @@ const Pendaftaran = () => {
                         aria-label="Username"
                         aria-describedby="basic-addon1"
                       />
-                      {error.nik && <p style={{ color: "red" }}>{error.nik}</p>}
                     </div>
+                    {error.nik && <p style={{ color: "red" }}>{error.nik}</p>}
                   </div>
                 </div>
                 <div className="d-flex justify-content-center align-item-center mt-4">
-                  <button type="submit" className="btn btn-outline-light">
-                    Lanjut <i className="fa fa-check"></i>
+                  <button
+                    onClick={getAntri}
+                    type="button"
+                    className="btn btn-outline-light"
+                    data-toggle="modal"
+                    data-target="#modal-secondary">
+                    Lanjut <i className="fa fa-check" />
                   </button>
+                  {/* <button type="submit" className="btn btn-outline-light">
+                    Lanjut <i className="fa fa-check"></i>
+                  </button> */}
+                </div>
+                <div className="modal fade" id="modal-secondary">
+                  <div className="modal-dialog">
+                    <div className="modal-content bg-secondary">
+                      <div className="modal-header">
+                        <h4 className="modal-title">Detail Form</h4>
+                        <button
+                          type="button"
+                          className="close"
+                          data-dismiss="modal"
+                          aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div className="modal-body">
+                        {loading ? (
+                          "loading..."
+                        ) : (
+                          <>
+                            <div className="form-row mt-3">
+                              <label className="col-md-3">No Antrian</label>
+                              {/* {antrian === "" ? (
+                              <span>1</span>
+                            ) : (
+                              <span>{antrian + 1}</span>
+                            )} */}
+                              <span>{antrian}</span>
+                            </div>
+                            <div className="form-row mt-3">
+                              <label className="col-md-3">Nama Lengkap</label>
+                              <span>{insert.nama}</span>
+                            </div>
+                            <div className="form-row mt-3">
+                              <label className="col-md-3">Jenis Kelamin</label>
+                              <span>{insert.jk}</span>
+                            </div>
+                            <div className="form-row mt-3">
+                              <label className="col-md-3">Tgl Periksa</label>
+                              <span>{insert.tanggal}</span>
+                            </div>
+                            <div className="form-row mt-3">
+                              <label className="col-md-3">Poliklinik</label>
+                              <span>{nama}</span>
+                            </div>
+                            <div className="form-row mt-3">
+                              <label className="col-md-3">Penjamin</label>
+                              <span>{insert.penjamin}</span>
+                            </div>
+                            <div className="form-row mt-3">
+                              <label className="col-md-3">NIK</label>
+                              <span>{insert.nik}</span>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                      <div className="modal-footer justify-content-between">
+                        <button
+                          type="button"
+                          className="btn btn-outline-light"
+                          data-dismiss="modal">
+                          Close
+                        </button>
+                        <button
+                          onClick={handleSubmit}
+                          type="submit"
+                          className="btn btn-outline-light">
+                          Save changes
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </form>
             </div>
