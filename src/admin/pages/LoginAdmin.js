@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo-klinik.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import ReCAPTCHA from "react-google-recaptcha";
+import Swal from "sweetalert2";
 
 const LoginAdmin = () => {
 
@@ -10,6 +12,13 @@ const LoginAdmin = () => {
 
     const [validator, setValidator] = useState([]);
     const navigate = useNavigate();
+
+    const [capthca, setCaptcha] = useState(false);
+
+
+    const onChange = () => {
+
+    };
 
     useEffect(() => {
         if (localStorage.getItem("data")) {
@@ -21,24 +30,35 @@ const LoginAdmin = () => {
     const loginHandler = async (e) => {
         e.preventDefault();
 
-        const formData = new FormData();
+        if (!capthca) {
+            Swal.fire("ReCaptcha Verification", "Please Fill the Captcha Verification", "error")
+            return;
+        } else {
 
-        formData.append("email", email);
-        formData.append("password", password);
-        await axios
-            .post("http://127.0.0.1:8000/api/login-user", formData)
-            .then((response) => {
-                console.log(response.data);
-                localStorage.setItem("data", response.data.token_login);
+            const formData = new FormData();
 
-                navigate("/admin/dashboard");
-            })
-            .catch((error) => {
-                console.log(error.response.data);
-                setValidator(error.response.data);
-                setEmail("");
-                setPassword("");
-            });
+            formData.append("email", email);
+            formData.append("password", password);
+            await axios
+                .post("http://127.0.0.1:8000/api/login-user", formData)
+                .then((response) => {
+                    console.log(response.data);
+                    localStorage.setItem("data", response.data.token_login);
+
+                    navigate("/admin/dashboard");
+                })
+                .catch((error) => {
+                    console.log(error.response.data);
+                    setValidator(error.response.data);
+                    setEmail("");
+                    setPassword("");
+                });
+
+
+        }
+
+
+
     };
 
     return (
@@ -98,6 +118,10 @@ const LoginAdmin = () => {
                                     {validator.password[0]}
                                 </div>
                             )}
+                            <ReCAPTCHA
+                                sitekey="6LcNlOooAAAAAJZBanfAitcaWFF-A8tPgSW5OCyO"
+                                onChange={() => setCaptcha(true)}
+                            />
                             <div className="row">
                                 {/* /.col */}
                                 <div className="col-12">

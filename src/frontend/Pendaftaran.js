@@ -94,7 +94,7 @@ const Pendaftaran = () => {
       <div className="container">
         <div className="my-5">
           <Link to="/poliklinik">
-            <button className="btn btn-outline-light mb-3">Cancel</button>
+            <button className="btn btn-outline-light mb-3"><i className="fa fa-arrow-left"></i> Cancel</button>
           </Link>
           <div className="card">
             <div className="card-body">
@@ -294,6 +294,16 @@ const Pendaftaran = () => {
                             <div className="form-row mt-3">
                               <label className="col-md-3">Poliklinik</label>
                               <span>{nama}</span>
+                            </div>
+                            <div className="form-row mt-3">
+                              <label className="col-md-3">Dokter</label>
+                              <div className="col-md-6">
+                                <select name="" className="custom-select custom-select-sm" id="">
+                                  <option value="">Pilih Dokter</option>
+                                  <option value="">Dr. XXX</option>
+                                  <option value="">Dr. XXX</option>
+                                </select>
+                              </div>
                             </div>
                             <div className="form-row mt-3">
                               <label className="col-md-3">Penjamin</label>

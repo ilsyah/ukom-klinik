@@ -1,10 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Topnav from "../components/Topnav";
 import Sidenav from "../components/Sidenav";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import axios from 'axios';
 
 const DetailPasien = () => {
+
+    const { id } = useParams();
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        // axios.get(`http://127.0.0.1:8000/api/v1/pelayanan/${id}`)
+        //     .then(response => {
+        //         setData(response.data);
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     });
+
+        fetch(`http://127.0.0.1:8000/api/v1/pelayanan/${id}`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((datax) => {
+                setData([datax]);
+            });
+    }, [id])
+
     return (
         <div className="wrapper">
             <Topnav />
@@ -24,28 +47,31 @@ const DetailPasien = () => {
                                         <h3 className="card-title">Detail Pasien</h3>
                                     </div>
                                     <div className="card-body">
-                                        <form>
-                                            <div className="form-row mt-3">
-                                                <label className='col-md-3'>Nama Pasien</label>
-                                                <span>Nama_Pasien</span>
-                                            </div>
-                                            <div className="form-row mt-3">
-                                                <label className='col-md-3'>NIK</label>
-                                                <span>XXXXXXXXXXXX</span>
-                                            </div>
-                                            <div className="form-row mt-3">
-                                                <label className='col-md-3'>Tgl Periksa</label>
-                                                <span>Tgl / Bln / Thn</span>
-                                            </div>
-                                            <div className="form-row mt-3">
-                                                <label className='col-md-3'>Poliklinik</label>
-                                                <span>Nama_Poliklinik</span>
-                                            </div>
-                                            <div className="form-row mt-3">
-                                                <label className='col-md-3'>Penjamin</label>
-                                                <span>Nama_Penjamin</span>
-                                            </div>
-                                        </form>
+                                        {data.map((item) => (
+                                            <form key={item.id}>
+                                                <div className="form-row mt-3">
+                                                    <label className='col-md-3'>Nama Pasien</label>
+                                                    <span>{item.nama}</span>
+                                                </div>
+                                                <div className="form-row mt-3">
+                                                    <label className='col-md-3'>NIK</label>
+                                                    <span>{item.nik}</span>
+                                                </div>
+                                                <div className="form-row mt-3">
+                                                    <label className='col-md-3'>Tgl Periksa</label>
+                                                    <span>{item.tanggal}</span>
+                                                </div>
+                                                <div className="form-row mt-3">
+                                                    <label className='col-md-3'>Poliklinik</label>
+                                                    <span>{item.poliklinik.poliklinik}</span>
+                                                </div>
+                                                <div className="form-row mt-3">
+                                                    <label className='col-md-3'>Penjamin</label>
+                                                    <span>{item.penjamin}</span>
+                                                </div>
+                                            </form>
+
+                                        ))}
                                     </div>
                                 </div>
                             </div>

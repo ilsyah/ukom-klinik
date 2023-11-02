@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Topnav from "../components/Topnav";
 import Sidenav from "../components/Sidenav";
 import Footer from "../components/Footer";
+import Swal from "sweetalert2";
 
 const TambahDokter = () => {
 
@@ -62,6 +63,7 @@ const TambahDokter = () => {
                 //Success
                 setError({});
                 setFormData({ nama: '', email: '', password: '', alamat: '', poliklinik_klinik: 'pilih poliklinik' })
+                Swal.fire("Sukses", "Data Berhasil Ditambahkan", "success");
                 navigate('/admin/data-dokter')
             } else {
                 const errorData = await response.json();

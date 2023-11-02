@@ -8,21 +8,21 @@ const Landing = () => {
         <div>
             <Topnav2 />
             <div className="container">
-                <div class="row position-relative" style={{ height: 'calc(100vh - 6rem)' }}>
-                    <div class="d-flex justify-content-center flex-column overflow-hidden">
-                        <div class="flex-row ">
+                <div className="row position-relative" style={{ height: 'calc(100vh - 6rem)' }}>
+                    <div className="d-flex justify-content-center flex-column overflow-hidden">
+                        <div className="flex-row ">
                             <h1><b>Selamat Datang <span className='text-success'>KlinikSehat.com</span></b></h1>
                             <h4>Apakah Anda Memiliki Keluhan?</h4>
                             <p>Segeralah Berobat Karena Kesehatan Anda Adalah Prioritas Kami</p>
                             {/* <div className="mx-1"> */}
                             <Link to='/poliklinik'>
-                                <button type="button" class="btn btn-outline-light mx-1">Pasien</button>
+                                <button type="button" className="btn btn-outline-light mx-1">Pasien</button>
                             </Link>
                             <Link to='/dokter/login'>
-                                <button type="button" class="btn btn-outline-light mx-1">Dokter</button>
+                                <button type="button" className="btn btn-outline-light mx-1">Dokter</button>
                             </Link>
                             <Link to='/admin/login'>
-                                <button type="button" class="btn btn-outline-light mx-1">Admin</button>
+                                <button type="button" className="btn btn-outline-light mx-1">Admin</button>
                             </Link>
                             {/* </div> */}
                         </div>

@@ -62,7 +62,7 @@ function App() {
 
         <Route path="admin/antrian" element={<Antrian />} />
         <Route path="admin/history" element={<History />} />
-        <Route path="admin/detail-pasien" element={<DetailPasien />} />
+        <Route path="admin/detail-pasien/:id" element={<DetailPasien />} />
 
         {/* Admin Routing End */}
       </Routes>

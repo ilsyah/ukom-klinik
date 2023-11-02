@@ -10,16 +10,18 @@ const History = () => {
     const [poli, setPoli] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const fetchPoli = () => {
-        fetch('http://127.0.0.1:8000/api/v1/poliklinik')
-            .then((response) => {
-                return response.json();
-            })
-            .then((datapoli) => {
-                // console.log(datapoli)
-                setPoli(datapoli);
-            })
-    }
+    const [tanggal, setTanggal] = useState('');
+
+    // const fetchPoli = () => {
+    //     fetch('http://127.0.0.1:8000/api/v1/poliklinik')
+    //         .then((response) => {
+    //             return response.json();
+    //         })
+    //         .then((datapoli) => {
+    //             // console.log(datapoli)
+    //             setPoli(datapoli);
+    //         })
+    // }
 
     const fetchHistory = () => {
         fetch('http://127.0.0.1:8000/api/v1/history')
@@ -35,8 +37,10 @@ const History = () => {
 
     useEffect(() => {
         fetchHistory();
-        fetchPoli();
+        // fetchPoli();
     }, []);
+
+    const filterHistory = history.filter(item => item.tanggal.includes(tanggal));
 
     return (
         <div className="wrapper">
@@ -83,6 +87,9 @@ const History = () => {
                                                 <button className="btn btn-sm btn-outline-light ml-2">View</button>
                                             </div>
                                         </div> */}
+                                        <div className="col-md-2 ml-2 mb-2">
+                                            <input type="date" value={tanggal} onChange={(e) => { setTanggal(e.target.value) }} className="form-control form-control-sm" />
+                                        </div>
                                         <div className="card-body table-responsive p-0"
                                             style={{ height: 400 }}>
                                             {loading ? <h1 className="text-center">Loading bang</h1> : (
@@ -98,14 +105,14 @@ const History = () => {
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        {history.map((item) => (
+                                                        {filterHistory.map((item) => (
                                                             <tr key={item.id}>
                                                                 {/* <td>1.</td> */}
                                                                 <td>{item.nama}</td>
                                                                 <td>{item.poliklinik.poliklinik}</td>
                                                                 <td>{item.penjamin}</td>
                                                                 <td>
-                                                                    <Link to='/admin/detail-pasien' className="btn btn-sm btn-warning mx-1">
+                                                                    <Link to={`/admin/detail-pasien/${item.id}`} className="btn btn-sm btn-warning mx-1">
                                                                         <i className="fa fa-info fa-sm"></i>
                                                                     </Link>
                                                                 </td>

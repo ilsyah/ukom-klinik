@@ -10,6 +10,8 @@ const Antrian = () => {
   const [loading, setLoading] = useState(true);
   const [poli, setPoli] = useState('');
 
+  const [tanggal, setTanggal] = useState('')
+
   const fetchLayanan = () => {
     fetch("http://127.0.0.1:8000/api/v1/poliklinik")
       .then((response) => {
@@ -38,7 +40,7 @@ const Antrian = () => {
     fetchAntrian();
   }, []);
   // console.log(antrian)
-  const filterAntri = antrian.filter(item => item.poliklinik.poliklinik.includes(poli))
+  const filterAntri = antrian.filter(item => item.tanggal.includes(tanggal) && item.poliklinik.poliklinik.includes(poli))
   // console.log(filterAntri)
 
   // const id = antrian[].id;
@@ -53,14 +55,19 @@ const Antrian = () => {
             <div className="row pt-6">
               <h3>Data Antrian Pasien</h3>
             </div>
-            <div className="row col-md-3">
-              <select value={poli} onChange={e => setPoli(e.target.value)} className="custom-select custom-select-sm col-5">
-                <option value=''>Semua</option>
-                {layanan.map((item) => (
-                  // console.log(item)
-                  <option key={item.id} value={item.poliklinik}>{item.poliklinik}</option>
-                ))}
-              </select>
+            <div className="row">
+              <div className="mx-1">
+                <select value={poli} onChange={e => setPoli(e.target.value)} className="custom-select custom-select-sm">
+                  <option value=''>Semua</option>
+                  {layanan.map((item) => (
+                    // console.log(item)
+                    <option key={item.id} value={item.poliklinik}>{item.poliklinik}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="mx-1">
+                <input type="date" value={tanggal} onChange={(e) => { setTanggal(e.target.value) }} className="form-control form-control-sm" />
+              </div>
             </div>
             {loading ? (
               <h1 className="text-center">Loading bang</h1>

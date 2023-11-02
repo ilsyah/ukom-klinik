@@ -9,6 +9,8 @@ const History = () => {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [tanggal, setTanggal] = useState('');
+
   const fetchHistory = () => {
     fetch('http://127.0.0.1:8000/api/v1/history')
       .then((response) => {
@@ -24,6 +26,8 @@ const History = () => {
   useEffect(() => {
     fetchHistory();
   }, []);
+
+  const filterHistory = history.filter(item => item.tanggal.includes(tanggal));
 
   return (
     <div className="wrapper">
@@ -69,6 +73,9 @@ const History = () => {
                   </div>
                   <div className="card-body table-responsive p-0"
                     style={{ height: 400 }}>
+                    <div className="col-md-2 ml-2 mb-2">
+                      <input type="date" value={tanggal} onChange={(e) => { setTanggal(e.target.value) }} className="form-control form-control-sm" />
+                    </div>
                     {loading ? <h1 className="text-center">Loading bang</h1> : (
                       <table className="table table-head-fixed text-nowrap text-center">
                         <thead>
@@ -82,7 +89,7 @@ const History = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {history.map((item) => (
+                          {filterHistory.map((item) => (
                             <tr key={item.id}>
                               {/* <td>1.</td> */}
                               <td>{item.nama}</td>

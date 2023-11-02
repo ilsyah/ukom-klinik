@@ -36,7 +36,7 @@ const TambahLayanan = () => {
             .post("http://127.0.0.1:8000/api/v1/poliklinik", formData)
             .then((response) => {
                 // console.log(response.data);
-                Swal.fire("Sukses", "Data Berhasil", "success");
+                Swal.fire("Sukses", "Data Berhasil Ditambahkan", "success");
                 navigate("/admin/data-layanan");
             })
             .catch((error) => {
