@@ -35,7 +35,7 @@ const TambahLayanan = () => {
         await axios
             .post("http://127.0.0.1:8000/api/v1/poliklinik", formData)
             .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 Swal.fire("Sukses", "Data Berhasil", "success");
                 navigate("/admin/data-layanan");
             })
@@ -44,7 +44,7 @@ const TambahLayanan = () => {
                 setError(error.response.data);
             });
     };
-    console.log(error)
+    // console.log(error)
 
     return (
         <div className="wrapper">

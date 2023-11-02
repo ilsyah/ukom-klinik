@@ -20,7 +20,7 @@ const Topnav = () => {
 
   useEffect(() => {
     if (!token) {
-      navigate("/");
+      navigate("/admin/login");
     }
 
     fetchData();

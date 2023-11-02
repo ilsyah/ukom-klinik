@@ -16,7 +16,7 @@ const TambahDokter = () => {
                 return response.json();
             })
             .then((datapoli) => {
-                console.log(datapoli)
+                // console.log(datapoli)
                 setPoli(datapoli);
             });
     };

@@ -14,6 +14,7 @@ const LoginAdmin = () => {
     useEffect(() => {
         if (localStorage.getItem("data")) {
             navigate("/admin/dashboard");
+            window.location.reload();
         }
     }, []);
 

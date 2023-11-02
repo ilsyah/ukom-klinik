@@ -70,8 +70,18 @@ const Pendaftaran = () => {
     await axios
       .post("http://127.0.0.1:8000/api/v1/pelayanan", formData)
       .then((response) => {
-        Swal.fire("Sukses", "Data Berhasil", "success");
-        navigate("/");
+        navigate('/')
+        Swal.fire({
+          title: 'Pendaftaran Sukses',
+          icon: 'success',
+          confirmButtonClass: 'btn-success',
+          confirmButtonText: 'Selesai',
+          closeOnConfirm: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
+        })
       })
       .catch((error) => {
         setError(error.response.data.errors);

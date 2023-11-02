@@ -4,10 +4,14 @@ import Topnav from "../components/Topnav";
 import Sidenav from "../components/Sidenav";
 import Footer from "../components/Footer";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const DataDokter = () => {
   const [dokter, setDokter] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [layanan, setLayanan] = useState([]);
+  // const [dokterList, setDokterList] = useState([]);
+  const [poli, setPoli] = useState('');
 
   const fetchDokter = () => {
     fetch("http://127.0.0.1:8000/api/v1/dokter")
@@ -18,16 +22,47 @@ const DataDokter = () => {
         // console.log(data)
         setLoading(false);
         setDokter(data);
+        // setDokterList(data);
       });
   };
+
+  const fetchLayanan = () => {
+    fetch("http://127.0.0.1:8000/api/v1/poliklinik")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        // console.log(data)
+        setLayanan(data);
+
+      });
+  };
+
+  const alertDelete = (id) => {
+    Swal.fire({
+      title: 'apakah anda yakin ingin menghapus data ini ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonClass: 'btn-danger',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: "No, cancel plx!",
+      closeOnConfirm: false,
+      closeOnCancel: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDelete(id);
+      } else {
+        Swal.fire("Cancelled", "Your imaginary file is safe :)", "error");
+      }
+    });
+  }
 
   const handleDelete = (id) => {
     axios
       .delete(`http://127.0.0.1:8000/api/v1/dokter/${id}`)
       .then((response) => {
         if (response.status === 200) {
-          // Data berhasil dihapus, lakukan sesuatu
-          console.log("Data berhasil dihapus");
+          reload();
         } else {
           // Tampilkan pesan error atau tangani error sesuai kebutuhan
           console.error("Gagal menghapus data");
@@ -35,9 +70,17 @@ const DataDokter = () => {
       });
   };
 
+  const reload = () => {
+    window.location.reload();
+  }
+
   useEffect(() => {
     fetchDokter();
+    fetchLayanan();
   }, []);
+
+  const filterDokter = dokter.filter(item => item.poliklinik.poliklinik.includes(poli))
+  // console.log(filterDokter)
 
   return (
     // <h1>y</h1>
@@ -53,7 +96,7 @@ const DataDokter = () => {
                   <div className="card-header">
                     <h3 className="card-title">Data Dokter</h3>
                     <div className="card-tools">
-                      <div
+                      {/* <div
                         className="input-group input-group-sm"
                         style={{ width: 150 }}>
                         <input
@@ -67,17 +110,29 @@ const DataDokter = () => {
                             <i className="fas fa-search" />
                           </button>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                   {/* /.card-header */}
-                  <div className="col-lg-3 px-3 mb-3">
-                    <Link to="/admin/tambah-dokter">
-                      <button className="btn btn-outline-light btn-sm">
-                        <i className="fa fa-plus fa-sm"></i> Tambah Dokter
-                      </button>
-                    </Link>
+                  <div className="row my-2">
+                    <div className="mx-3">
+                      <Link to="/admin/tambah-dokter">
+                        <button className="btn btn-outline-light btn-sm">
+                          <i className="fa fa-plus fa-sm"></i> Tambah Dokter
+                        </button>
+                      </Link>
+                    </div>
+                    <div className="col-md-3">
+                      <select value={poli} onChange={e => setPoli(e.target.value)} className="custom-select custom-select-sm col-5">
+                        {/* console.log(item) */}
+                        <option value=''>Semua</option>
+                        {layanan.map((item) => (
+                          <option key={item.id} value={item.poliklinik}>{item.poliklinik}</option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
+
                   <div
                     className="card-body table-responsive p-0"
                     style={{ height: 400 }}>
@@ -87,7 +142,7 @@ const DataDokter = () => {
                       <table className="table table-head-fixed text-nowrap text-center">
                         <thead>
                           <tr>
-                            <th>No</th>
+                            {/* <th>No</th> */}
                             <th>Nama</th>
                             <th>poliklinik</th>
                             <th>Email</th>
@@ -96,9 +151,9 @@ const DataDokter = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {dokter.map((item) => (
+                          {filterDokter.map((item) => (
                             <tr key={item.id}>
-                              <td>1</td>
+                              {/* <td>1</td> */}
                               <td>{item.nama}</td>
                               <td>{item.poliklinik.poliklinik}</td>
                               <td>{item.email}</td>
@@ -111,7 +166,7 @@ const DataDokter = () => {
                                 </Link>
                                 <button
                                   onClick={() => {
-                                    handleDelete(item.id);
+                                    alertDelete(item.id);
                                   }}
                                   className="btn btn-sm btn-danger mx-1">
                                   <i className="fa fa-trash-alt fa-sm"></i>

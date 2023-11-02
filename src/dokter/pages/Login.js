@@ -13,6 +13,7 @@ const Login = () => {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       navigate("/dokter/dashboard");
+      window.location.reload();
     }
   }, []);
 

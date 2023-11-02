@@ -37,7 +37,7 @@ const History = () => {
                 <div className="card mt-3">
                   <div className="card-header">
                     <h3 className="card-title">History Pasien</h3>
-                    <div className="card-tools">
+                    {/* <div className="card-tools">
                       <ul className="pagination pagination-sm float-right">
                         <li className="page-item">
                           <a className="page-link" href="#">
@@ -65,7 +65,7 @@ const History = () => {
                           </a>
                         </li>
                       </ul>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="card-body table-responsive p-0"
                     style={{ height: 400 }}>
@@ -73,7 +73,7 @@ const History = () => {
                       <table className="table table-head-fixed text-nowrap text-center">
                         <thead>
                           <tr>
-                            <th>No</th>
+                            {/* <th>No</th> */}
                             <th>Nama</th>
                             <th>poliklinik</th>
                             <th>Penjamin</th>
@@ -84,7 +84,7 @@ const History = () => {
                         <tbody>
                           {history.map((item) => (
                             <tr key={item.id}>
-                              <td>1.</td>
+                              {/* <td>1.</td> */}
                               <td>{item.nama}</td>
                               <td>{item.poliklinik.poliklinik}</td>
                               <td>{item.penjamin}</td>

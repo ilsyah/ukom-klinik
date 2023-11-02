@@ -5,14 +5,15 @@ import Footer from "../components/Footer";
 import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const navigate = useNavigate();
-  const token = localStorage.getItem("data");
+  // const navigate = useNavigate();
+  // const token = localStorage.getItem("data");
 
-  useEffect(() => {
-    if (!token) {
-      navigate("/");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!token) {
+  //     navigate("/ad");
+  //   }
+  // }, []);
+
 
   return (
     <div className="wrapper">
