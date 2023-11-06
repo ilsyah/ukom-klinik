@@ -8,9 +8,16 @@ import axios from 'axios';
 const DetailDokter = () => {
 
     const { id } = useParams();
+
+    const [tanggal, setTanggal] = useState('');
+
     const [data, setData] = useState([]);
     const [pasien, setPasien] = useState([]);
-    const jumlahPasien = pasien.length;
+
+    const filterData = pasien.filter(item => item.tanggal.includes(tanggal));
+
+    const jumlahPasien = filterData.length;
+
 
     const fetchDokter = () => {
         axios.get(`http://127.0.0.1:8000/api/v1/dokter/${id}`)
@@ -68,6 +75,7 @@ const DetailDokter = () => {
                                                 <div className="form-row mt-3">
                                                     <label className='col-md-3'>Jumlah Pasien Done</label>
                                                     <span>{jumlahPasien ? (jumlahPasien) : ('Tidak ada pasien')}</span>
+                                                    <input type="date" value={tanggal} onChange={(e) => { setTanggal(e.target.value) }} className="form-control form-control-sm" />
                                                 </div>
                                             </form>
 
