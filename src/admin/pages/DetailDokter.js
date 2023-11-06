@@ -74,8 +74,8 @@ const DetailDokter = () => {
                                                 </div>
                                                 <div className="form-row mt-3">
                                                     <label className='col-md-3'>Jumlah Pasien Done</label>
-                                                    <span>{jumlahPasien ? (jumlahPasien) : ('Tidak ada pasien')}</span>
-                                                    <input type="date" value={tanggal} onChange={(e) => { setTanggal(e.target.value) }} className="form-control form-control-sm" />
+                                                    <span className='col-md-2'>{jumlahPasien ? (jumlahPasien) : ('Tidak ada pasien')}</span>
+                                                    <input type="date" value={tanggal} onChange={(e) => { setTanggal(e.target.value) }} className="form-control form-control-sm col-md-2" />
                                                 </div>
                                             </form>
 
