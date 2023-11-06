@@ -27,6 +27,7 @@ import Pendaftaran from "./frontend/Pendaftaran";
 import DetailHistory from "./dokter/detail/DetailHistory";
 import TambahLayanan from "./admin/pages/TambahLayanan";
 import EditLayanan from "./admin/pages/EditLayanan";
+import DetailDokter from "./admin/pages/DetailDokter";
 // Frontend End
 
 function App() {
@@ -44,7 +45,7 @@ function App() {
         <Route path="dokter/antrian" element={<PasienDokter />} />
         <Route path="dokter/history" element={<HistoryDokter />} />
         <Route path="dokter/login" element={<Login />} />
-        <Route path="dokter/detail-history" element={<DetailHistory />} />
+        <Route path="dokter/detail-history/:id" element={<DetailHistory />} />
         <Route path="dokter/detail-antrian/:id" element={<DetailAntrian />} />
         {/* Dokter Routing End */}
 
@@ -53,6 +54,7 @@ function App() {
 
         <Route path="admin/dashboard" element={<Dashboard />} />
         <Route path="admin/data-dokter" element={<DataDokter />} />
+        <Route path="admin/detail-dokter/:id" element={<DetailDokter />} />
         <Route path="admin/tambah-dokter" element={<TambahDokter />} />
         <Route path="admin/edit-dokter/:id" element={<EditDokter />} />
 

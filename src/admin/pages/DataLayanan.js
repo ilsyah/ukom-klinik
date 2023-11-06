@@ -5,26 +5,33 @@ import Sidenav from "../components/Sidenav";
 import Footer from "../components/Footer";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Pagination from "../components/Pagination";
 
 const DataLayanan = () => {
   const [layanan, setLayanan] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+
+  const [search, setSearch] = useState('');
 
   const navigate = useNavigate();
 
-  const fetchLayanan = () => {
-    fetch("http://127.0.0.1:8000/api/v1/poliklinik")
+  const fetchLayanan = async (page) => {
+    axios.get(`http://127.0.0.1:8000/api/v1/poliklinik?page=${page}`)
       .then((response) => {
-        return response.json();
+        const meta = response.data
+        setLayanan(response.data.data)
+        setTotalPage(meta.last_page)
+        setLoading(false)
+        // console.log(meta)
       })
-      .then((data) => {
-        // console.log(data)
-        setLoading(false);
-        setLayanan(data);
-
-      });
   };
+
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
 
   const alertDelete = (id) => {
     Swal.fire({
@@ -64,9 +71,11 @@ const DataLayanan = () => {
     window.location.reload();
   }
 
+  const filterLayanan = layanan.filter(item => item.poliklinik.toLowerCase().includes(search.toLowerCase()))
+
   useEffect(() => {
-    fetchLayanan();
-  }, []);
+    fetchLayanan(currentPage);
+  }, [currentPage]);
 
   return (
     <div className="wrapper">
@@ -81,12 +90,14 @@ const DataLayanan = () => {
                   <div className="card-header">
                     <h3 className="card-title">Data Layanan</h3>
                     <div className="card-tools">
-                      {/* <div
+                      <div
                         className="input-group input-group-sm"
                         style={{ width: 150 }}>
                         <input
                           type="text"
                           name="table_search"
+                          value={search}
+                          onChange={(e) => { setSearch(e.target.value) }}
                           className="form-control float-right"
                           placeholder="Search"
                         />
@@ -95,7 +106,7 @@ const DataLayanan = () => {
                             <i className="fas fa-search" />
                           </button>
                         </div>
-                      </div> */}
+                      </div>
                     </div>
                   </div>
                   {/* /.card-header */}
@@ -125,7 +136,7 @@ const DataLayanan = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {layanan.map((item) => (
+                          {filterLayanan.map((item) => (
                             <tr key={item.id}>
                               {/* <td>1</td> */}
                               <td>{item.poliklinik}</td>
@@ -152,33 +163,9 @@ const DataLayanan = () => {
                   </div>
                   <div className="card-footer">
                     <div className="card-tools">
-                      <ul className="pagination pagination-sm float-right">
-                        <li className="page-item">
-                          <a className="page-link" href="#">
-                            «
-                          </a>
-                        </li>
-                        <li className="page-item">
-                          <a className="page-link" href="#">
-                            1
-                          </a>
-                        </li>
-                        <li className="page-item">
-                          <a className="page-link" href="#">
-                            2
-                          </a>
-                        </li>
-                        <li className="page-item">
-                          <a className="page-link" href="#">
-                            3
-                          </a>
-                        </li>
-                        <li className="page-item">
-                          <a className="page-link" href="#">
-                            »
-                          </a>
-                        </li>
-                      </ul>
+                      <div>
+                        <Pagination totalPages={totalPage} handleClick={handlePageClick} />
+                      </div>
                     </div>
                   </div>
                 </div>

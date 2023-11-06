@@ -91,6 +91,10 @@ const DetailAntrian = () => {
                             <span>{item.poliklinik.poliklinik}</span>
                           </div>
                           <div className="form-row mt-3">
+                            <label className="col-md-3">Dokter</label>
+                            <span>{item.dokter.nama}</span>
+                          </div>
+                          <div className="form-row mt-3">
                             <label className="col-md-3">Penjamin</label>
                             <span>{item.penjamin}</span>
                           </div>

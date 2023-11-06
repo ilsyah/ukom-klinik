@@ -7,10 +7,22 @@ import axios from "axios";
 
 const Pendaftaran = () => {
   const { id } = useParams();
-  const [nama, setNama] = useState(id);
+  const [nama, setNama] = useState('');
   const [antrian, setAntrian] = useState("");
   const [loading, setLoading] = useState(true);
   const [insert, setInsert] = useState({});
+  const [dokter, setDokter] = useState([]);
+  // const [select, setSelect] = useState();
+
+  const [formData, setFormData] = useState({
+    penjamin: "",
+    nama: "",
+    jk: "",
+    tanggal: "",
+    nik: "",
+    poliklinik_id: id,
+    dokter_id: "",
+  });
 
   const fetchPoliklinik = () => {
     fetch(`http://127.0.0.1:8000/api/v1/poliklinik/${id}`)
@@ -27,23 +39,16 @@ const Pendaftaran = () => {
     fetchPoliklinik();
   }, []);
 
-  const [formData, setFormData] = useState({
-    penjamin: "",
-    nama: "",
-    jk: "",
-    tanggal: "",
-    nik: "",
-    poliklinik_id: id,
-  });
 
   const navigate = useNavigate();
 
   const [error, setError] = useState({});
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
 
     setError({
@@ -52,16 +57,25 @@ const Pendaftaran = () => {
     });
   };
 
-  const getAntri = async (e) => {
+  const getData = async (e) => {
     e.preventDefault();
 
     await axios
       .post("http://127.0.0.1:8000/api/v1/get-antri", formData)
       .then((response) => {
-        setLoading(false);
+        setLoading(false)
         setAntrian(response.data.antrian);
         setInsert(formData);
       });
+    await axios
+      .post("http://127.0.0.1:8000/api/v1/get-dokter", formData)
+      .then((response) => {
+        setLoading(false)
+        setDokter(response.data);
+        setInsert(formData);
+      });
+
+    console.log(formData)
   };
 
   const handleSubmit = async (e) => {
@@ -87,6 +101,8 @@ const Pendaftaran = () => {
         setError(error.response.data.errors);
       });
   };
+
+  // console.log(formData.dokter_id + 'ha')
 
   return (
     <div className="wrapper">
@@ -241,7 +257,7 @@ const Pendaftaran = () => {
                 </div>
                 <div className="d-flex justify-content-center align-item-center mt-4">
                   <button
-                    onClick={getAntri}
+                    onClick={getData}
                     type="button"
                     className="btn btn-outline-light"
                     data-toggle="modal"
@@ -298,10 +314,11 @@ const Pendaftaran = () => {
                             <div className="form-row mt-3">
                               <label className="col-md-3">Dokter</label>
                               <div className="col-md-6">
-                                <select name="" className="custom-select custom-select-sm" id="">
+                                <select value={formData.dokter_id} onChange={handleChange} name="dokter_id" className="custom-select custom-select-sm" id="">
                                   <option value="">Pilih Dokter</option>
-                                  <option value="">Dr. XXX</option>
-                                  <option value="">Dr. XXX</option>
+                                  {dokter.map((item) => (
+                                    <option key={item.id} value={item.id}>{item.nama}</option>
+                                  ))}
                                 </select>
                               </div>
                             </div>
@@ -318,16 +335,10 @@ const Pendaftaran = () => {
                       </div>
                       <div className="modal-footer justify-content-between">
                         <button
-                          type="button"
-                          className="btn btn-outline-light"
-                          data-dismiss="modal">
-                          Close
-                        </button>
-                        <button
                           onClick={handleSubmit}
                           type="submit"
                           className="btn btn-outline-light">
-                          Save changes
+                          Kirim
                         </button>
                       </div>
                     </div>
@@ -337,9 +348,9 @@ const Pendaftaran = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div >
       <Footer2 />
-    </div>
+    </div >
   );
 };
 

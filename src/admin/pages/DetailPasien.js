@@ -10,23 +10,20 @@ const DetailPasien = () => {
     const { id } = useParams();
     const [data, setData] = useState([])
 
-    useEffect(() => {
-        // axios.get(`http://127.0.0.1:8000/api/v1/pelayanan/${id}`)
-        //     .then(response => {
-        //         setData(response.data);
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     });
 
-        fetch(`http://127.0.0.1:8000/api/v1/pelayanan/${id}`)
-            .then((response) => {
-                return response.json();
+    const fetchHistory = () => {
+        axios.get(`http://127.0.0.1:8000/api/v1/history/${id}`)
+            .then(response => {
+                setData([response.data]);
             })
-            .then((datax) => {
-                setData([datax]);
-            });
-    }, [id])
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    useEffect(() => {
+        fetchHistory();
+    }, [])
 
     return (
         <div className="wrapper">
@@ -64,6 +61,10 @@ const DetailPasien = () => {
                                                 <div className="form-row mt-3">
                                                     <label className='col-md-3'>Poliklinik</label>
                                                     <span>{item.poliklinik.poliklinik}</span>
+                                                </div>
+                                                <div className="form-row mt-3">
+                                                    <label className='col-md-3'>Nama Dokter</label>
+                                                    <span>{item.dokter.nama}</span>
                                                 </div>
                                                 <div className="form-row mt-3">
                                                     <label className='col-md-3'>Penjamin</label>

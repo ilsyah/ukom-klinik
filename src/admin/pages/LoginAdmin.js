@@ -44,8 +44,8 @@ const LoginAdmin = () => {
                 .then((response) => {
                     console.log(response.data);
                     localStorage.setItem("data", response.data.token_login);
-
                     navigate("/admin/dashboard");
+                    window.location.reload();
                 })
                 .catch((error) => {
                     console.log(error.response.data);

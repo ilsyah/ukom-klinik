@@ -13,7 +13,7 @@ const Antrian = () => {
   const [tanggal, setTanggal] = useState('')
 
   const fetchLayanan = () => {
-    fetch("http://127.0.0.1:8000/api/v1/poliklinik")
+    fetch("http://127.0.0.1:8000/api/v1/data-poliklinik")
       .then((response) => {
         return response.json();
       })
@@ -86,6 +86,14 @@ const Antrian = () => {
                       <div className="card-header">
                         <h3 className="card-title">
                           No Antri : {item.antrian}
+                        </h3>
+                        <br />
+                        <h3 className="card-title">
+                          Tanggal : {item.tanggal}
+                        </h3>
+                        <br />
+                        <h3 className="card-title">
+                          Poliklinik : {item.poliklinik.poliklinik}
                         </h3>
                         <div className="card-tools">
                           <button

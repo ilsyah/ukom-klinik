@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import Topnav from "../components/Topnav";
 import Sidenav from "../components/Sidenav";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useAsyncError } from "react-router-dom";
+import Pagination from "../components/Pagination";
+import axios from "axios";
 
 const History = () => {
 
@@ -11,6 +13,11 @@ const History = () => {
     const [loading, setLoading] = useState(true);
 
     const [tanggal, setTanggal] = useState('');
+
+    const [search, setSearch] = useState('');
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPage, setTotalPage] = useState(1);
 
     // const fetchPoli = () => {
     //     fetch('http://127.0.0.1:8000/api/v1/poliklinik')
@@ -23,24 +30,33 @@ const History = () => {
     //         })
     // }
 
-    const fetchHistory = () => {
-        fetch('http://127.0.0.1:8000/api/v1/history')
+    const fetchHistory = (page) => {
+        axios.get(`http://127.0.0.1:8000/api/v1/history?page=${page}`)
             .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                // console.log(data)
+                // return response.json();
+                const meta = response.data
+                // console.log(response)
+
+                setTotalPage(meta.last_page)
                 setLoading(false);
-                setHistory(data);
-            });
+                setHistory(response.data.data);
+            })
+        // .then((data) => {
+        //     // console.log(data)
+
+        // });
     };
 
-    useEffect(() => {
-        fetchHistory();
-        // fetchPoli();
-    }, []);
+    const handlePageClick = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    }
 
-    const filterHistory = history.filter(item => item.tanggal.includes(tanggal));
+    useEffect(() => {
+        fetchHistory(currentPage);
+        // fetchPoli();
+    }, [currentPage]);
+
+    const filterHistory = history.filter(item => item.tanggal.includes(tanggal) && item.nama.includes(search));
 
     return (
         <div className="wrapper">
@@ -54,13 +70,15 @@ const History = () => {
                                 <div className="card mt-4">
                                     <div className="card-header">
                                         <h3 className="card-title">History Pasien</h3>
-                                        {/* <div className="card-tools">
+                                        <div className="card-tools">
                                             <div
                                                 className="input-group input-group-sm"
                                                 style={{ width: 150 }}>
                                                 <input
                                                     type="text"
                                                     name="table_search"
+                                                    value={search}
+                                                    onChange={(e) => { setSearch(e.target.value) }}
                                                     className="form-control float-right"
                                                     placeholder="Search"
                                                 />
@@ -70,7 +88,7 @@ const History = () => {
                                                     </button>
                                                 </div>
                                             </div>
-                                        </div> */}
+                                        </div>
                                     </div>
                                     {/* /.card-header */}
                                     <div className="card-body p-0">
@@ -99,6 +117,7 @@ const History = () => {
                                                             {/* <th>No</th> */}
                                                             <th>Nama</th>
                                                             <th>poliklinik</th>
+                                                            <th>tanggal</th>
                                                             <th>Penjamin</th>
                                                             <th>#</th>
                                                             <th>Status</th>
@@ -110,6 +129,7 @@ const History = () => {
                                                                 {/* <td>1.</td> */}
                                                                 <td>{item.nama}</td>
                                                                 <td>{item.poliklinik.poliklinik}</td>
+                                                                <td>{item.tanggal}</td>
                                                                 <td>{item.penjamin}</td>
                                                                 <td>
                                                                     <Link to={`/admin/detail-pasien/${item.id}`} className="btn btn-sm btn-warning mx-1">
@@ -128,33 +148,7 @@ const History = () => {
                                     </div>
                                     <div className="card-footer">
                                         <div className="card-tools">
-                                            <ul className="pagination pagination-sm float-right">
-                                                <li className="page-item">
-                                                    <a className="page-link" href="#">
-                                                        «
-                                                    </a>
-                                                </li>
-                                                <li className="page-item">
-                                                    <a className="page-link" href="#">
-                                                        1
-                                                    </a>
-                                                </li>
-                                                <li className="page-item">
-                                                    <a className="page-link" href="#">
-                                                        2
-                                                    </a>
-                                                </li>
-                                                <li className="page-item">
-                                                    <a className="page-link" href="#">
-                                                        3
-                                                    </a>
-                                                </li>
-                                                <li className="page-item">
-                                                    <a className="page-link" href="#">
-                                                        »
-                                                    </a>
-                                                </li>
-                                            </ul>
+                                            <Pagination totalPages={totalPage} handleClick={handlePageClick} />
                                         </div>
                                     </div>
                                     {/* /.card-body */}

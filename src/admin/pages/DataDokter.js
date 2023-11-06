@@ -5,6 +5,7 @@ import Sidenav from "../components/Sidenav";
 import Footer from "../components/Footer";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Pagination from "../components/Pagination";
 
 const DataDokter = () => {
   const [dokter, setDokter] = useState([]);
@@ -13,21 +14,34 @@ const DataDokter = () => {
   // const [dokterList, setDokterList] = useState([]);
   const [poli, setPoli] = useState('');
 
-  const fetchDokter = () => {
-    fetch("http://127.0.0.1:8000/api/v1/dokter")
+  const [search, setSearch] = useState('');
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+
+  const fetchDokter = (page) => {
+    axios.get(`http://127.0.0.1:8000/api/v1/dokter?page=${page}`)
       .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        // console.log(data)
+        // return response.json();
+        const meta = response.data
+        setDokter(response.data.data)
+        setTotalPage(meta.last_page)
         setLoading(false);
-        setDokter(data);
-        // setDokterList(data);
-      });
+      })
+    // .then((data) => {
+    //   // console.log(data)
+    //   setLoading(false);
+    //   setDokter(data);
+    //   // setDokterList(data);
+    // });
   };
 
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
+
   const fetchLayanan = () => {
-    fetch("http://127.0.0.1:8000/api/v1/poliklinik")
+    fetch("http://127.0.0.1:8000/api/v1/data-poliklinik")
       .then((response) => {
         return response.json();
       })
@@ -75,11 +89,11 @@ const DataDokter = () => {
   }
 
   useEffect(() => {
-    fetchDokter();
+    fetchDokter(currentPage);
     fetchLayanan();
-  }, []);
+  }, [currentPage]);
 
-  const filterDokter = dokter.filter(item => item.poliklinik.poliklinik.includes(poli))
+  const filterDokter = dokter.filter(item => item.poliklinik.poliklinik.includes(poli) && item.nama.toLowerCase().includes(search.toLowerCase()))
   // console.log(filterDokter)
 
   return (
@@ -96,21 +110,23 @@ const DataDokter = () => {
                   <div className="card-header">
                     <h3 className="card-title">Data Dokter</h3>
                     <div className="card-tools">
-                      {/* <div
+                      <div
                         className="input-group input-group-sm"
                         style={{ width: 150 }}>
                         <input
                           type="text"
                           name="table_search"
+                          value={search}
+                          onChange={(e) => { setSearch(e.target.value) }}
                           className="form-control float-right"
-                          placeholder="Search"
+                          placeholder="Cari Nama"
                         />
                         <div className="input-group-append">
                           <button type="submit" className="btn btn-default">
                             <i className="fas fa-search" />
                           </button>
                         </div>
-                      </div> */}
+                      </div>
                     </div>
                   </div>
                   {/* /.card-header */}
@@ -160,6 +176,11 @@ const DataDokter = () => {
                               <td>{item.alamat}</td>
                               <td>
                                 <Link
+                                  to={`/admin/detail-dokter/${item.id}`}
+                                  className="btn btn-sm btn-success mx-1">
+                                  <i className="fa fa-info fa-sm"></i>
+                                </Link>
+                                <Link
                                   to={`/admin/edit-dokter/${item.id}`}
                                   className="btn btn-sm btn-warning mx-1">
                                   <i className="fa fa-edit fa-sm"></i>
@@ -180,33 +201,7 @@ const DataDokter = () => {
                   </div>
                   <div className="card-footer">
                     <div className="card-tools">
-                      <ul className="pagination pagination-sm float-right">
-                        <li className="page-item">
-                          <a className="page-link" href="#">
-                            «
-                          </a>
-                        </li>
-                        <li className="page-item">
-                          <a className="page-link" href="#">
-                            1
-                          </a>
-                        </li>
-                        <li className="page-item">
-                          <a className="page-link" href="#">
-                            2
-                          </a>
-                        </li>
-                        <li className="page-item">
-                          <a className="page-link" href="#">
-                            3
-                          </a>
-                        </li>
-                        <li className="page-item">
-                          <a className="page-link" href="#">
-                            »
-                          </a>
-                        </li>
-                      </ul>
+                      <Pagination totalPages={totalPage} handleClick={handlePageClick} />
                     </div>
                   </div>
                 </div>

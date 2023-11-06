@@ -40,7 +40,7 @@ const TambahLayanan = () => {
                 navigate("/admin/data-layanan");
             })
             .catch((error) => {
-                console.log(error.response.data);
+                // console.log(error.response.data);
                 setError(error.response.data);
             });
     };
@@ -71,7 +71,9 @@ const TambahLayanan = () => {
                                                 <input id='poliklinik' name="poliklinik" type="text" placeholder='Nama Poliklinik' value={formData.poliklinik} onChange={handleChange} className="form-control col-md-9" />
 
                                             </div>
-                                            {error.poliklinik && <div className="d-flex justify-content-center alert alert-danger col-5 text-center">{error.poliklinik}</div>}
+                                            {/* {error.poliklinik && <div className="d-flex justify-content-center alert alert-danger col-5 text-center">{error.poliklinik}</div>} */}
+                                            {error.poliklinik && <p style={{ color: 'red' }}>{error.poliklinik}</p>}
+
 
                                             <div className="form-row mt-3">
 
@@ -79,7 +81,8 @@ const TambahLayanan = () => {
                                                 <input id='kode' name="kode_poli" type="number" placeholder='Kode Poliklinik' value={formData.kode_poli} onChange={handleChange} className="form-control col-md-9" />
 
                                             </div>
-                                            {error.kode_poli && <div className="d-flex justify-content-center alert alert-danger col-5 text-center">{error.kode_poli}</div>}
+                                            {/* {error.kode_poli && <div className="d-flex justify-content-center alert alert-danger col-5 text-center">{error.kode_poli}</div>} */}
+                                            {error.kode_poli && <p style={{ color: 'red' }}>{error.kode_poli}</p>}
                                             <div className="row mt-5 d-flex justify-content-center">
                                                 <button type="submit" className="btn btn-outline-light">Simpan <i className='fa fa-check'></i></button>
                                             </div>

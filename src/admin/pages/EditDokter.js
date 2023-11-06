@@ -18,7 +18,7 @@ const EditDokter = () => {
     // Fetch Data Poliklinik
 
     const fetchPoli = () => {
-        fetch('http://127.0.0.1:8000/api/v1/poliklinik')
+        fetch('http://127.0.0.1:8000/api/v1/data-poliklinik')
             .then((response) => {
                 return response.json();
             })
@@ -91,7 +91,7 @@ const EditDokter = () => {
                                             </div>
                                             <div className="form-row mt-3">
                                                 <label className="col-md-3">Poliklinik <span className='text-danger'>*</span></label>
-                                                <select className="custom-select col-md-9" name='poliklinik_klinik' id="poliklinik" onChange={handleChange} value={data.poliklinik_klinik || ""}>
+                                                <select className="custom-select col-md-9" name='poliklinik_id' id="poliklinik" onChange={handleChange} value={data.poliklinik_id || ""}>
                                                     {poli.map((item) => (
                                                         <option key={item.id} value={item.id} >{item.poliklinik}</option>
                                                     ))}

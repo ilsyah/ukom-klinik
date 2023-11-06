@@ -10,7 +10,7 @@ const Poliklinik = () => {
     const [loading, setLoading] = useState(true);
 
     const fetchPoliklinik = () => {
-        fetch('http://127.0.0.1:8000/api/v1/poliklinik')
+        fetch('http://127.0.0.1:8000/api/v1/data-poliklinik')
             .then((response) => {
                 return response.json();
             })

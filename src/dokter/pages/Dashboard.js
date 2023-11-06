@@ -51,7 +51,7 @@ const Dashboard = () => {
                     <i className="fa fa-users" />
                   </div>
                   <Link
-                    to="/admin/antrian"
+                    to="/dokter/antrian"
                     className="small-box-footer text-white">
                     More info <i className="fas fa-arrow-circle-right" />
                   </Link>
