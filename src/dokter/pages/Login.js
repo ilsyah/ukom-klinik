@@ -67,6 +67,9 @@ const Login = () => {
             <span className="h1 text-success">
               <b>Klinik</b>Sehat
             </span>
+            <h5 className="text-light">
+              Login Dokter
+            </h5>
           </div>
           <div className="card-body">
             {/* <p className="login-box-msg">Sign in for Admin</p> */}
